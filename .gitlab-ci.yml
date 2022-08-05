@@ -10,7 +10,6 @@ build_client:
   only:
     - main
   script:
-    - cd melctl_client
     - PACKAGE_VERSION=$(python setup.py --version)
     - python3 -m pip install twine
     - python3 setup.py sdist
