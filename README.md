@@ -1,92 +1,238 @@
+<!-- vim: set ft=2 ts=Markdown -->
+
 # MelCtl - Client
 
-A command line client for MelCtl.
+The `melctl` command line interface.
 
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitlab.lxp.lu/lxp-hpc/IaC/meluxina/melctl-client.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitlab.lxp.lu/lxp-hpc/IaC/meluxina/melctl-client/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+\[TOC\]
 
 ## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+
+MelCtl client can be installed in 2 ways:
+
+* From its Python package
+* From source
+
+### Python package
+
+Requirements:
+* `python3.8+`
+* Python's module `pip`
+* A GitLab PAT (_Personal Access Token_)
+
+Command:
+
+```shell
+pip install --index-url https://__token__:<PAT>@gitlab.lxp.lu/api/v4/projects/179/packages/pypi/simple melctl-client
+```
+
+Notes:
+* Replace `<PAT>` with your GitLab PAT (i.e. `glpat-a1b2c3d4...`)
+* Do **not** replace `__token__`
+
+### From source
+
+Requirements:
+* `python3.8+`
+* `git`
+
+Steps:
+* (Optional) Create a virtual environment: `python3 -m venv <venv name>`
+* (Optional) Activate the virtual environment: `source <venv path>/bin/activate`
+* Clone this reposiory
+* Install the client from witihn the repository: `pip install -e client/`
 
 ## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+General syntax:
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+```shell
+melctl <endpoint> [action] [arguments]
+```
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+* _endpoint_ refers to the API endpoint your're accessing, e.g, `tasks`
+* _action_ refers to the action to perform (not all _endpoints_ have _actions_)
+* _arguments_ refers to the endpoint's or endpoint's action's argument
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Login
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+See [the login documentation page](./docs/endpoints/login.md)
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+### Command examples
 
-## License
-For open source projects, say how it is licensed.
+To get the list of available endpoints:
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+```shell
+melctl -h
+```
+
+To get the list of an endpoint's actions (if any):
+
+```shell
+melctl <endpoint> -h
+```
+
+To get the list of an endpoint's actions arguments (if any):
+
+```shell
+melctl <endpoint> <action> -h
+```
+
+### Command arguments
+
+Some arguments are common for most endpoints and endpoints's actions:
+
+* `-h`, `--help`: Show the endpoint or endpoint's action help
+* `-a AUTH`, `--auth AUTH`: Select the authentication token (e.g. `Bearer <JWT>`)
+* `-u URL`, `--url URL`: Select the API server base URL (e.g. `http://host.tld:port`)
+* `-v VERSION`, `--version VERSION`: Select the API endpoint version (e.g. `v1`)
+* `-o FORMAT`, `--output-format FORMAT`: Select the command outpout format
+  * `table` (default): Format output as table
+  * `wide`: Format output as table with all available fields
+  * `json`: Format output as JSON document
+  * `yaml`: Format output as YAML document
+
+### Endpoints
+
+| Endpoint   | Action   | Description                            | Documentation                        |
+| ---------- | -------- | -------------------------------------- | ------------------------------------ |
+| `ping`     | -        | Ping the MelCtl API server             | [Link](./docs/endpoints/ping.md)     |
+| `version`  | -        | Print MelCtl client and server version | [Link](./docs/endpoints/version.md)  |
+| `config`   | `show`   | Show the client configuration          | [Link](./docs/endpoints/config.md)   |
+| `config`   | `init`   | Initialize a new default configuration | [Link](./docs/endpoints/config.md)   |
+| `login`    | `user`   | Login / get an user token              | [Link](./docs/endpoints/login.md)    |
+| `login`    | `admin`  | Login / get an admin token             | [Link](./docs/endpoints/login.md)    |
+| `login`    | `info`   | Get login / token information          | [Link](./docs/endpoints/login.md)    |
+| `curl`     | -        | Performs low-level API call            | [Link](./docs/endpoints/curl.md)     |
+| `tasks`    | `list`   | List available tasks                   | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `queued` | List queued and running tasks          | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `status` | Get a task status                      | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `get`    | Get a task result                      | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `submit` | Runs a new task                        | [Link](./docs/endpoints/tasks.md)    |
+| `projects` | `list`   | List all projects                      | [Link](./docs/endpoints/projects.md) |
+| `projects` | `get`    | Get one or more project information    | [Link](./docs/endpoints/projects.md) |
+| `projects` | `report` | Reports one or all projects usage      | [Link](./docs/endpoints/projects.md) |
+
+## Configuration
+
+By default, `melctl` will use the cofiguration file `~/.melctl-cli.env`. You may
+change the configration file location by setting the environement
+variable `MELCTL_CLI_CONFIG`:
+
+```
+MELCTL_CLI_CONFIG="/etc/melctl-cli.env" melctl <endpoint> [action] [arguments]
+```
+
+The following configuration attributes are supported:
+
+| Attribute | Type     | Default                 | Description           |
+| --------- | -------- | ----------------------- | --------------------- |
+| `url`     | `string` | `http://127.0.0.1:8888` | MelCtl API server URL |
+
+## Developers documentation
+
+### Add endpoint(s)
+
+Endpoints are defined in `client/melctl_client/endpoints/<module.py>`, and
+should be registered in `client/melctl_client/endpoints/__init__.py`.
+
+Let's start by creating a `SimpleEndpoint`, e.g. `test.py` in
+`client/melctl_client/endpoints/test.py`:
+
+```python
+from .__base__ import SimpleEndpoint
+
+
+class Ping(SimpleEndpoint):
+    """Demonstrates MelCtl endpoint.
+    """
+
+    def __init__(self, subparser):
+        """Initializes the endpoint.
+
+        This SimpleEndpoint initialize its parent class with:
+            - subparser: The command line parser
+            - ``test``: The endpoint action name
+            - ``GET``: The HTTP method to invoke
+            - ``test/ping?data={data}``: The URL fragment to template and invoke
+        """
+        super().__init__(subparser, 'ping', 'GET', 'test/ping?data={data}')
+        self.parser.add_argument('-d', '--data', dest='data', type=str,
+            default=None, help='Test ping data')
+```
+
+For more complex use cases, you may implement an `Endpoint` instead of
+a `SimpleEndpoint`:
+
+```python
+from .__base__ import Endpoint
+
+
+class Callback(Endpoint):
+    """Demonstrates MelCtl callback endpoint.
+    """
+
+    hint_callback_url: str = '<MelCtl host>/test/callback/receive'
+
+    def __init__(self, subparser):
+        """Initializes the endpoint.
+
+        This Endpoint initialize its parent class with:
+            - subparser: The command line parser
+            - ``callback``: The endpoint action name
+        """
+        super().__init__(subparser, 'callback')
+        self.parser.add_argument('cback_url', type=str,
+            help=f'Callback URL (you may try "{self.hint_callback_url}")')
+        self.parser.add_argument('-m', '--method', dest='method', type=str.upper,
+            default='POST', help='Callback HTTP method')
+
+    def target(self, args):
+        """Runs the endpoint.
+
+        An ``Endpoint`` must implement a ``target`` method to call the API server.
+        Parsed arguments are made available in ``args``.
+        """
+        req = self.session.get(
+            f'{self.url}/test/callback/send'
+            f'?url={args.cback_url}'
+            f'&method={args.method}'
+        )
+        req.raise_for_status()
+        return req.json()
+```
+
+You may also define the method `render` to post-process the API result:
+
+```python
+class MyEndpoint(Endpoint):
+
+    # ...
+
+    def render(self, args, data):
+        """Change the API return (i.e. ``data``).
+        """
+        return data.get('someField', 42)
+```
+
+When your new endpoint(s) are ready to be exposed, you have to `import`
+(==register) them in `client/melctl_client/endpoints/__init__.py`:
+
+```python
+# Import the endpoint module(s)
+from . import ping
+from . import test
+# ...
+
+# Register the endpoints
+endpoints = {
+    # If the endpoint has a single action, use it directly
+    'ping': ping.Ping,
+    # If the endpoint implement multiples actions, use a list
+    'test': [
+        test.Ping,
+        test.CAllback
+    ],
+    # ...
+}
+```
