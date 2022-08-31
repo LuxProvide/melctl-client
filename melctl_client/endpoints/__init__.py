@@ -14,6 +14,8 @@ try:
     from . import tasks
     from . import projects
     from . import curl
+    from . import s3ds
+    from . import users
 except Exception:
     errmsg = dedent(f'''\
         Error while importing endpoints modules
@@ -52,6 +54,17 @@ endpoints = {
         projects.Create,
         projects.Setup,
         projects.Report
+    ],
+    'users': [
+        users.List,
+        users.Get,
+        users.S3Status,
+        users.S3Setup
+    ],
+    's3': [
+        s3ds.List,
+        s3ds.Setup,
+        s3ds.Disable
     ],
     'tasks': [
         tasks.List,
