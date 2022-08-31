@@ -5,7 +5,7 @@ Manage MeluXina projects.
 ## Usage
 
 ```shell
-melctl config {list,get,report} [common args]
+melctl projects {list,get,report} [common args]
 ```
 
 ### List all projects

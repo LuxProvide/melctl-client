@@ -113,6 +113,58 @@ Some arguments are common for most endpoints and endpoints's actions:
 | `projects` | `get`    | Get one or more project information    | [Link](./docs/endpoints/projects.md) |
 | `projects` | `report` | Reports one or all projects usage      | [Link](./docs/endpoints/projects.md) |
 
+### JQ scripting
+
+`jq` parses and filters JSON document. MelCtl can be piped into `jq`:
+
+```shell
+melctl <endpoint> [action] [arguments] --nocolor -o json 2>/dev/null | jq [filter]
+```
+
+Where:
+* `--nocolor` disable MelCtl colored output
+* `-o json` renders MelCtl output as JSON
+* `filter` is the JQ filter(s) to apply
+
+#### Render output using JQ
+
+```shell
+melctl users list --nocolor -o json 2>/dev/null | jq 
+```
+
+#### Using JQ on list of objects
+
+If MelCtl JSON output is a list of object like:
+
+```json
+[
+    {
+        "name": "jpclipffel",
+        "uid": 15019,
+        "s3ds": {
+            "tag": "jpclipffel",
+            "fspaths": "/mnt/tier2/users/jpclipffel"
+        }
+    },
+    {
+        "name": "foo",
+        "uid": 12345,
+        "s3ds": {}
+    },
+    // ...
+]
+```
+
+Use filters like this:
+
+```shell
+# Select all objects name
+... | jq '.[].name'
+
+# Select all objects with S3DS content
+... | jq '.[] | select((.s3ds | length) > 0)'
+```
+
 ## Configuration
 
 By default, `melctl` will use the cofiguration file `~/.melctl-cli.env`. You may
