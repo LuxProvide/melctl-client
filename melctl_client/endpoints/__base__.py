@@ -147,16 +147,20 @@ class Endpoint:
                 TerminalFormatter()
             ))
 
+    def format_raw(self, args, data):
+        return data
+
     def format(self, args, data):
         """Formats output.
         """
         if data is not None:
-            {
+            return {
                 'table': self.format_table,
                 'json': self.format_json,
                 'yaml': self.format_yaml,
                 'wide': self.format_wide,
-                'keys': self.format_wide
+                'keys': self.format_wide,
+                'raw': self.format_raw
             }[args.outform](args, data)
 
     def wait_task(self, task_id: str, frequency: int, timeout: int):
@@ -204,13 +208,13 @@ class Endpoint:
                         args.wait_frequency,
                         args.wait_timeout
                     )
-                    self.format(args, self.render(args, data))
+                    return self.format(args, self.render(args, data))
                 # Print taskID
                 else:
-                    self.format(args, data)
+                    return self.format(args, data)
             # Process synchronous result
             else:
-                self.format(args, self.render(args, data))
+                return self.format(args, self.render(args, data))
         except Exception as error:
             if args.traceback:
                 raise

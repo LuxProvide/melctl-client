@@ -42,7 +42,7 @@ Steps:
 * Clone this reposiory
 * Install the client from witihn the repository: `pip install -e client/`
 
-## Usage
+## Command line usage
 
 General syntax:
 
@@ -163,6 +163,33 @@ Use filters like this:
 
 # Select all objects with S3DS content
 ... | jq '.[] | select((.s3ds | length) > 0)'
+```
+
+## Python API usage
+
+> **Note**  
+> Python API is currently a second-class citizen.  
+
+General usage (can be run from an `ipython` instance):
+
+```python
+import melctl_client.__main__
+
+# Create a blocking and a non-blocking API instances
+api_sync = melctl_client.__main__.API()
+api_async = melctl_client.__main__.API(blocking=False)
+
+# Run
+ping_data = api_sync('ping')
+projects_data = api_async('projects', 'get', 'lxp')
+
+# Output sync response
+# ping_data = {'ping': 'pong', 'serverVersion': 'x.y.z', ...}
+print(ping_data)
+
+# Output async response
+# projects_data = {'taskId': '80282886-a3b1-4443-8f0b-69e120e0844d'}
+print(projects_data)
 ```
 
 ## Configuration
