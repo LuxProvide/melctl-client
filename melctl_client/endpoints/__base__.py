@@ -201,6 +201,7 @@ class Endpoint:
             self.logger.debug(f'Response data: {data}')
             # Process asynchronous result
             if isinstance(data, dict) and len(data) == 1 and 'taskId' in data:
+                self.logger.warning(f'Now tracking asynchronous task: {data["taskId"]}')
                 # Wait for task completion
                 if args.wait == True:
                     data = self.wait_task(
