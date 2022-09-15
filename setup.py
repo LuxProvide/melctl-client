@@ -16,11 +16,15 @@ setup(
     ]
   },
   install_requires=[
-      'requests',
-      'tabulate',
-      'pygments',
-      'pydantic[dotenv]',
-      'pyyaml',
-      'python-jose[cryptography]',
+    'requests',
+    'tabulate',
+    'pygments',
+    'pydantic[dotenv]',
+    'pyyaml',
+    'python-jose[cryptography]',
+    # Library stubs
+    'types-pyyaml',
+    'types-tabulate',
+    'types-pygments'
   ]
 )

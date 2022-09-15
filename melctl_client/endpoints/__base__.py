@@ -39,7 +39,7 @@ class Endpoint:
             'User-Agent': f'melctl-client/{__version__}'
         })
         self.session.verify = False
-        requests.packages.urllib3.disable_warnings()
+        requests.packages.urllib3.disable_warnings() # type: ignore[attr-defined]
         # ---
         self.logger = logging.getLogger()
         self.log_fmt = logging.Formatter('[%(levelname)s] %(asctime)s | %(message)s')
@@ -59,7 +59,7 @@ class Endpoint:
         # Version
         self.parser.add_argument('-v', '--version', type=str,
             default='latest', help='API version')
-        # Task completion wait sitches
+        # Task completion wait switches
         self.parser.add_argument('--wait', dest='wait',
             action='store_true', default=self.wait, help='Wait for task to complete')
         self.parser.add_argument('--nowait', dest='wait',
@@ -79,7 +79,7 @@ class Endpoint:
             default=False, help='Disable colored output')
         # Table output format
         self.parser.add_argument('--tablefmt', dest='tablefmt', type=str.lower,
-            default='simple', choices=tabulate._table_formats.keys(),
+            default='simple', choices=tabulate._table_formats.keys(), # type: ignore[attr-defined]
             help='Table format')
         # Dump exception
         self.parser.add_argument('-t', '--traceback', dest='traceback',
