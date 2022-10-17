@@ -10,7 +10,6 @@ try:
     from . import version
     from . import login
     from . import conf
-    # from . import test
     from . import tasks
     from . import projects
     from . import curl
@@ -44,10 +43,6 @@ endpoints = {
         conf.Show,
         conf.Init
     ],
-    # 'test': [
-    #     test.Ping,
-    #     test.Callback
-    # ],
     'projects': [
         projects.Projects,
         projects.Get,
@@ -61,7 +56,7 @@ endpoints = {
         users.S3Status,
         users.S3Setup
     ],
-    's3': [
+    's3ds': [
         s3ds.List,
         s3ds.Setup,
         s3ds.Disable

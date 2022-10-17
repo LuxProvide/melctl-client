@@ -29,8 +29,9 @@ class Setup(Endpoint):
     def __init__(self, subparser):
         super().__init__(subparser, 'setup')
         self.parser.add_argument('user', type=str, help='User name (== access key tag)')
-        self.parser.add_argument('--uid', type=int, required=True)
-        self.parser.add_argument('--gid', type=int, required=True)
+        self.parser.add_argument('--uid', type=int, required=True, help='User UID')
+        self.parser.add_argument('--gid', type=int, required=True, help='User GID')
+        self.parser.add_argument('--paths', nargs='+', default=[], help='Allowed paths')
 
     def target(self, args):
         req = self.session.post(
@@ -38,7 +39,8 @@ class Setup(Endpoint):
             json={
                 'user': args.user,
                 'fs_uid': args.uid,
-                'fs_gid': args.gid
+                'fs_gid': args.gid,
+                'fs_paths': args.paths
             }
         )
         req.raise_for_status()
