@@ -105,4 +105,60 @@ Example return as YAML:
   uid: 15019
 ```
 
+### Get an user S3 status
+
+```shell
+melctl users s3-status <name> [common args]
+```
+
+* `name` is a user name as appearing in the IDM.
+
+Example return as table:
+
+```
+tag         uuid                                      fspaths                      fsuid
+----------  ----------------------------------------  ---------------------------  ---------
+jpclipffel  1337c6de830200667ef2c5c16c9959c1c03d2405  /mnt/tier2/users/jpclipffel  15019:555
+```
+
+Example return as YAML:
+
+```yaml
+- current_usage: 0
+  enabled: true
+  fspaths: /mnt/tier2/users/jpclipffel
+  fsuid: 15019:555
+  quotalimit: UNLIMITED
+  tag: jpclipffel
+  uuid: 1337c6de830200667ef2c5c16c9959c1c03d2405
+```
+
+### Set user S3 access
+
+```shell
+melctl users s3-setup <name> [common args]
+```
+
+* `name` is a user name as appearing in the IDM.
+
+Example return as table:
+
+```
+tag         uuid                                      fspaths                      fsuid
+----------  ----------------------------------------  ---------------------------  ---------
+jpclipffel  1337c6de830200667ef2c5c16c9959c1c03d2405  /mnt/tier2/users/jpclipffel  15019:555
+```
+
+Example return as YAML:
+
+```yaml
+- current_usage: 0
+  enabled: true
+  fspaths: /mnt/tier2/users/jpclipffel
+  fsuid: 15019:555
+  quotalimit: UNLIMITED
+  tag: jpclipffel
+  uuid: 1337c6de830200667ef2c5c16c9959c1c03d2405
+```
+
 ---
