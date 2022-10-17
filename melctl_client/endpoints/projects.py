@@ -22,18 +22,18 @@ class Get(Endpoint):
 
     def __init__(self, subparser):
         super().__init__(subparser, 'get', headers=['name', 'users', 'coordinators', 'info'])
-        self.parser.add_argument('project', nargs='+',
-            help='Project(s) name or path')
+        # self.parser.add_argument('project', nargs='+',
+        #     help='Project(s) name or path')
+        self.parser.add_argument('project', type=str, help='Project name or path')
 
     def target(self, args):
-        req = self.session.get(f'{self.url}/projects')
+        req = self.session.get(f'{self.url}/projects/{args.project}')
         req.raise_for_status()
         return req.json()
 
     def render(self, args, data):
         return [
             account for account in data.get('projects', [])
-            if account.get('name', '') in args.project
         ]
 
 
@@ -141,10 +141,10 @@ class Report(Endpoint):
         if len(args.projects) == 1:
             url = f'{self.url}/projects/{args.projects[0]}'
         elif len(args.projects) > 1:
-            url = f'{self.url}/projects'
+            url = f'{self.url}/projects/_'
             params['names'] = ','.join(args.projects)
         else:
-            url = f'{self.url}/projects'
+            url = f'{self.url}/projects/_'
         # ---
         # Setup time range
         if args.time_range is not None:
