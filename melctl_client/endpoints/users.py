@@ -42,7 +42,7 @@ class S3Status(SimpleEndpoint):
 
     def __init__(self, subparser):
         super().__init__(subparser, 's3-status', 'GET', 'users/{name}/s3ds',
-            headers=['tag', 'uuid', 'fspaths', 'fsuid'])
+            headers=['tag', 'uuid', 'fs_paths', 'fs_uid'])
         self.parser.add_argument('name', help='User name')
 
     def render(self, args, data):
@@ -55,8 +55,19 @@ class S3Setup(SimpleEndpoint):
 
     def __init__(self, subparser):
         super().__init__(subparser, 's3-setup', 'POST', 'users/{name}/s3ds',
-            headers=['tag', 'uuid', 'fspaths', 'fsuid'])
+            headers=['tag', 'uuid', 'fs_paths', 'fs_uid', 'secretkey', 'accesskey'])
         self.parser.add_argument('name', help='User name')
+        self.parser.add_argument('--paths', nargs='+', default=[], help='Extra allowed paths')
+
+    def target(self, args):
+        req = self.session.post(
+            f'{self.url}/users/{args.name}/s3ds',
+            json={
+                'extra_paths': args.paths
+            }
+        )
+        req.raise_for_status()
+        return req.json()
 
     def render(self, args, data):
         return data.get('s3ds_accesskeys', [])
