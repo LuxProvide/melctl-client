@@ -15,6 +15,7 @@ try:
     from . import curl
     from . import s3ds
     from . import users
+    from . import slurm
 except Exception:
     errmsg = dedent(f'''\
         Error while importing endpoints modules
@@ -67,6 +68,11 @@ endpoints = {
         tasks.Status,
         tasks.Get,
         tasks.Submit
+    ],
+    'slurm': [
+        slurm.JobSubmit,
+        slurm.JobList,
+        slurm.JobGet
     ],
     'curl': curl.Curl
 }
