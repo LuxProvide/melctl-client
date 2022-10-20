@@ -10,7 +10,7 @@ class List(Endpoint):
         super().__init__(subparser, 'list')
     
     def target(self, args):
-        req = self.session.get(f'{self.url}/tasks/')
+        req = self.session.get(f'{self.url}/tasks')
         req.raise_for_status()
         return [{'task': task} for task in req.json().get('tasks', [])]
 
