@@ -136,17 +136,21 @@ Example return as YAML:
 ### Set user S3 access
 
 ```shell
-melctl users s3-setup <name> [common args]
+melctl users s3-setup <name> [--paths <path>, ...]
 ```
 
 * `name` is a user name as appearing in the IDM.
+* `path` are extra path to allow
+
+> **important**  
+> The S3 `secretkey` and `accesskey` are displayed only when the access is configured form the first time or when the access is re-enable.
 
 Example return as table:
 
 ```
-tag         uuid                                      fspaths                      fsuid
-----------  ----------------------------------------  ---------------------------  ---------
-jpclipffel  1337c6de830200667ef2c5c16c9959c1c03d2405  /mnt/tier2/users/jpclipffel  15019:555
+tag         uuid                                      fspaths                      fsuid      secretkey    accesskey
+----------  ----------------------------------------  ---------------------------  ---------  -----------  -----------
+jpclipffel  1337c6de830200667ef2c5c16c9959c1c03d2405  /mnt/tier2/users/jpclipffel  15019:555  
 ```
 
 Example return as YAML:
@@ -159,6 +163,8 @@ Example return as YAML:
   quotalimit: UNLIMITED
   tag: jpclipffel
   uuid: 1337c6de830200667ef2c5c16c9959c1c03d2405
+  secretkey: null
+  accesskey: null
 ```
 
 ---
