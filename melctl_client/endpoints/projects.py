@@ -21,10 +21,12 @@ class Get(Endpoint):
     """
 
     def __init__(self, subparser):
-        super().__init__(subparser, 'get', headers=['name', 'users', 'coordinators', 'info'])
+        super().__init__(subparser, 'get',
+            headers=['name', 'path', 'tres'])
         # self.parser.add_argument('project', nargs='+',
         #     help='Project(s) name or path')
-        self.parser.add_argument('project', type=str, help='Project name or path')
+        self.parser.add_argument('project', type=str,
+            help='Project name or path')
 
     def target(self, args):
         req = self.session.get(f'{self.url}/projects/{args.project}')
@@ -32,9 +34,7 @@ class Get(Endpoint):
         return req.json()
 
     def render(self, args, data):
-        return [
-            account for account in data.get('projects', [])
-        ]
+        return data.get('projects', [])
 
 
 class Create(Endpoint):
@@ -43,9 +43,12 @@ class Create(Endpoint):
 
     def __init__(self, subparser):
         super().__init__(subparser, 'create')
-        self.parser.add_argument('name', type=str, help='Project name')
-        self.parser.add_argument('--uid', type=int, default=-1, help='Project UID')
-        self.parser.add_argument('--parent', type=str, help='Parent project name', default='')
+        self.parser.add_argument('name', type=str,
+            help='Project name')
+        self.parser.add_argument('--uid', type=int, default=-1,
+            help='Project UID')
+        self.parser.add_argument('--parent', type=str,
+            help='Parent project name', default='')
 
     def target(self, args):
         # Project definition
@@ -67,21 +70,25 @@ class Setup(Endpoint):
     tres = ('cpu', 'gpu', 'mem', 'fpga')
 
     def __init__(self, subparser):
-        super().__init__(subparser, 'setup')
+        super().__init__(subparser, 'setup', headers=['name', 'path', 'tres'])
         self.parser.add_argument('name', type=str, help='Project name')
         for tres in self.tres:
-            self.parser.add_argument(f'--{tres}', dest=f'{tres}_mins', type=int, default=-1, help=f'{tres.upper()} quota in minutes')
+            self.parser.add_argument(f'--{tres}', dest=f'{tres}_mins',
+                type=int, default=-1, help=f'{tres.upper()} quota in minutes')
 
     def target(self, args):
         # Project definition
-        jsdata = {}
+        jsdata = {'quota': {}}
         # Project quotas
         for tres in self.tres:
-            jsdata[f'{tres}_mins'] = getattr(args, f'{tres}_mins')
+            jsdata['quota'][f'{tres}_mins'] = getattr(args, f'{tres}_mins')
         # Run
-        req = self.session.post(f'{self.url}/projects/{args.name}/setup', json=jsdata)
+        req = self.session.post(f'{self.url}/projects/{args.name}', json=jsdata)
         req.raise_for_status()
         return req.json()
+
+    def render(self, args, data):
+        return data.get('projects', [])
 
 
 class Report(Endpoint):

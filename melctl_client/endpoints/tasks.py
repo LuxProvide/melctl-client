@@ -1,4 +1,6 @@
 import re
+import json
+
 from .__base__ import Endpoint, SimpleEndpoint
 
 
@@ -46,23 +48,30 @@ class Submit(Endpoint):
     """Submits (creates) a new task.
     """
 
-    re_argcast = re.compile(r'(?P<cast>(int|float)):(?P<value>.*)')
+    @staticmethod
+    def str_to_bool(value: str) -> bool:
+        return value.lower() in ['true', 'yes', '1']
+
+    re_argcast = re.compile(r'(?P<cast>(int|float|bool)):(?P<value>.*)')
     casts = {
         'int': int,
-        'float': float
+        'float': float,
+        'bool': str_to_bool
     }
 
     def __init__(self, subparser):
         super().__init__(subparser, 'submit', wait=False)
         self.parser.add_argument('name', type=str, help='Task name')
         self.parser.add_argument('--args', nargs='+', default=[],
-            help='''
-            Task arguments; Integers and Floats should be
-            prefixed with "int:" or "float:"
+            help=f'''
+            Task arguments where ARGS is <value> or <type>:<value> 
+            and <type> is one of {', '.join(self.casts.keys())}
             ''')
+        self.parser.add_argument('--kwargs', type=str, default=None,
+            help='Task keyword arguments as a JSON string')
 
     def target(self, args):
-        # Cast arguments
+        # Cast positional arguments
         _args = []
         for arg in args.args:
             match = self.re_argcast.match(arg)
@@ -72,12 +81,17 @@ class Submit(Endpoint):
                 _args.append(cast(value))
             else:
                 _args.append(arg)
+        # Generate keyword arguments
+        _kwargs = {}
+        if args.kwargs is not None:
+            _kwargs = json.loads(args.kwargs)
         # Process
         req = self.session.post(
             f'{self.url}/tasks/submit',
             json={
                 'name': args.name,
-                'args': _args
+                'args': _args,
+                'kwargs': _kwargs
             })
         # Done
         req.raise_for_status()

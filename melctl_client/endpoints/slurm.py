@@ -10,7 +10,7 @@ class JobSubmit(Endpoint):
     """
 
     def __init__(self, subparser):
-        super().__init__(subparser, 'submit')
+        super().__init__(subparser, 'job-run')
         self.parser.add_argument('file', type=str, help='Batch file')
         self.parser.add_argument('--chdir', type=str, required=False, default='', help='Job working directory')
 
@@ -32,7 +32,7 @@ class JobList(Endpoint):
     """
 
     def __init__(self, subparser):
-        super().__init__(subparser, 'list-jobs', headers=[
+        super().__init__(subparser, 'job-list', headers=[
             'user_name', 'account', 'job_id', 'name', 'job_state'
         ])
         self.parser.add_argument('--user', type=str, required=False, default=None, help='User name')
@@ -62,7 +62,7 @@ class JobGet(Endpoint):
     """
 
     def __init__(self, subparser):
-        super().__init__(subparser, 'get-job', headers=[
+        super().__init__(subparser, 'job-get', headers=[
             'user_name', 'account', 'job_id', 'name', 'job_state'
         ])
         self.parser.add_argument('ref', type=str, help='Slurm job reference (ID or name)')
