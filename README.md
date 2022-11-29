@@ -39,8 +39,27 @@ Requirements:
 Steps:
 * (Optional) Create a virtual environment: `python3 -m venv <venv name>`
 * (Optional) Activate the virtual environment: `source <venv path>/bin/activate`
-* Clone this reposiory
+* Clone this repository
 * Install the client from witihn the repository: `pip install -e client/`
+
+## Upgrade
+
+### When installed from Python package
+
+Command:
+
+```shell
+pip install --upgrade --index-url https://__token__:<PAT>@gitlab.lxp.lu/api/v4/projects/179/packages/pypi/simple melctl-client
+```
+
+### When installed from source
+
+Steps:
+
+* If using a virtual environment: `source <venv path>/bin/activate`
+* Go to the cloned repository: `cd <repo path>`
+* Update the repository: `git pull`
+* If MelCtl was **not** installed in editable mode (with `-e`): `pip install client/`
 
 ## Command line usage
 
