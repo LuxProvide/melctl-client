@@ -11,7 +11,7 @@ class List(SimpleEndpoint):
         self.parser.add_argument('--all', action='store_true', default=False, help='List all (+expired)')
 
     def render(self, args, data):
-        users: list[dict] = []
+        users: list = []
         # Apply filters
         for user in data.get('users', []):
             # Ignore expired users if --all not present
@@ -34,6 +34,47 @@ class Get(SimpleEndpoint):
 
     def render(self, args, data):
         return data.get('users', [])
+
+
+class Create(SimpleEndpoint):
+    """Create a new user.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'create', 'POST', 'users')
+        self.parser.add_argument('--email', type=str.lower, required=True,
+            help='Email address')
+        self.parser.add_argument('--firstname', type=str, required=True,
+            help='First name / given name')
+        self.parser.add_argument('--lastname', type=str, required=True,
+            help='Last name / family name / surname')
+        self.parser.add_argument('--name', type=str, default=None,
+            help='Account name (optional)')
+        self.parser.add_argument('--phone', type=str, default=None,
+            help='Phone number (optional)')
+        self.parser.add_argument('--uid', type=int, default=None,
+            help='Account UID (optional)')
+        self.parser.add_argument('--gid', type=int, default=None,
+            help='Account GID (optional)')
+
+    def target(self, args):
+        # Required fields
+        jsdata = {
+            'email': args.email,
+            'firstname': args.firstname,
+            'lastname': args.lastname,
+        }
+        # Optional field
+        for field in ['name', 'phone', 'uid', 'gid']:
+            if getattr(args, field, None) is not None:
+                jsdata[field] = getattr(args, field)
+        # Send request
+        req = self.session.post(
+            f'{self.url}/{self.urn}',
+            json=jsdata
+        )
+        self.handle_status(args, req)
+        return req.json()
 
 
 class S3Status(SimpleEndpoint):

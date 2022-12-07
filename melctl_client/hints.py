@@ -11,7 +11,7 @@ class Hinter:
     """Base hinter class."""
 
     # Hint messages colors control codes
-    level_colors: dict[str, str] = {
+    level_colors: dict = {
         "reset": "\033[0m",
         "info": "\033[32m",
         "warning": "\033[33m",

@@ -236,7 +236,23 @@ class Endpoint:
         :param data: Received data
         """
         return data
-
+    
+    def handle_status(self, args, req: requests.Response):
+        """Automatically handles a MelCtl API return.
+        """
+        try:
+            req.raise_for_status()
+        except Exception as error:
+            try:
+                jsdata = req.json()
+            except Exception as e2:
+                print(e2)
+                jsdata = {}
+            # Enforce table fields
+            self.headers = 'keys'
+            # Print error
+            self.format(args, jsdata)
+            raise error
 
 class SimpleEndpoint(Endpoint):
     """Generic HTTP endpoint command line parser.
