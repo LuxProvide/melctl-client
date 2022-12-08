@@ -182,3 +182,23 @@ class Report(Endpoint):
                         alloc_name: int(alloc / self.unit_time_factors[args.unit_time[0]])
                     })
         return accounts
+
+
+class AddUser(SimpleEndpoint):
+    """Add user to a project.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'add-user', 'POST', 'projects/{project}/users')
+        self.parser.add_argument('project', type=str, help='Project name')
+        self.parser.add_argument('--users', type=str, nargs='+', default=[], help='List of user names')
+
+    def target(self, args):
+        req = self.session.post(
+            f'{self.url}/projects/{args.project}/users',
+            json={
+                'members': args.users
+            }
+        )
+        self.handle_status(args, req)
+        return req.json()

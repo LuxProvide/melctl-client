@@ -112,3 +112,20 @@ class S3Setup(SimpleEndpoint):
 
     def render(self, args, data):
         return data.get('s3ds_accesskeys', [])
+
+
+class S3Disable(SimpleEndpoint):
+    """Sets an user S3 access.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 's3-disable', 'DELETE', 'users/{name}/s3ds')
+        self.parser.add_argument('name', help='User name')
+
+    def target(self, args):
+        req = self.session.delete(
+            f'{self.url}/users/{args.name}/s3ds',
+            json={}
+        )
+        req.raise_for_status()
+        return req.json()

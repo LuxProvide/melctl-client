@@ -49,13 +49,16 @@ endpoints = {
         projects.Get,
         projects.Create,
         projects.Setup,
-        projects.Report
+        projects.Report,
+        projects.AddUser
     ],
     'users': [
         users.List,
         users.Get,
+        users.Create,
         users.S3Status,
-        users.S3Setup
+        users.S3Setup,
+        users.S3Disable
     ],
     's3ds': [
         s3ds.List,
