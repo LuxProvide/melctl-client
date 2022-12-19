@@ -56,6 +56,8 @@ class Create(SimpleEndpoint):
             help='Account UID (optional)')
         self.parser.add_argument('--gid', type=int, default=None,
             help='Account GID (optional)')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
 
     def target(self, args):
         # Required fields

@@ -1,4 +1,5 @@
 import sys
+from textwrap import dedent
 
 from .. import utils
 from .__base__ import SimpleEndpoint, Endpoint
@@ -43,52 +44,143 @@ class Create(Endpoint):
 
     def __init__(self, subparser):
         super().__init__(subparser, 'create')
-        self.parser.add_argument('name', type=str,
+        self.parser.add_argument('-p', '--parent', type=str,
+            required=True, help='Parent project name')
+        self.parser.add_argument('--name', type=str, default=None,
             help='Project name')
         self.parser.add_argument('--uid', type=int, default=-1,
             help='Project UID')
-        self.parser.add_argument('--parent', type=str,
-            help='Parent project name', default='')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
 
     def target(self, args):
-        # Project definition
-        jsdata = {
-            'name': args.name,
-            'uid': args.uid,
-            'parent': args.parent
-        }
-        # Run
+        # Auto create
+        if (args.name, args.uid) == (None, -1):
+            jsdata = {
+                'parent': args.parent
+            }
+        # Manual creation
+        elif args.name is not None and args.uid > 0:
+            jsdata = {
+                'parent': args.parent,
+                'name': args.name,
+                'uid': args.uid
+            }
+        # Invalid parameters
+        else:
+            print(
+                '--name requires a valid project uid with --uid > 0',
+                file=sys.stderr
+            )
+            print(
+                '--uid must be > 0 and requires a valid project name with --name',
+                file=sys.stderr
+            )
+            sys.exit(1)
+        # Proceed
         req = self.session.post(f'{self.url}/projects', json=jsdata)
         req.raise_for_status()
         return req.json()
 
 
-class Setup(Endpoint):
-    """Configures a project.
+class AddSharedFS(Endpoint):
+    """Add a SharedFS tier to a project.
     """
 
-    tres = ('cpu', 'gpu', 'mem', 'fpga')
-
     def __init__(self, subparser):
-        super().__init__(subparser, 'setup', headers=['name', 'path', 'tres'])
+        super().__init__(subparser, 'add-sharedfs')
         self.parser.add_argument('name', type=str, help='Project name')
-        for tres in self.tres:
-            self.parser.add_argument(f'--{tres}', dest=f'{tres}_mins',
-                type=int, default=-1, help=f'{tres.upper()} quota in minutes')
+        self.parser.add_argument('--tier', type=int, required=True, choices=(1, 2), help='SharedFS tier')
+        self.parser.add_argument('--owner', type=str, required=True, help='SharedFS directory owner (user name)')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
 
     def target(self, args):
-        # Project definition
-        jsdata = {'quota': {}}
-        # Project quotas
-        for tres in self.tres:
-            jsdata['quota'][f'{tres}_mins'] = getattr(args, f'{tres}_mins')
-        # Run
-        req = self.session.post(f'{self.url}/projects/{args.name}', json=jsdata)
+        req = self.session.post(f'{self.url}/projects/{args.name}/sharedfs', json={
+            'tier': args.tier,
+            'owner': args.owner
+        })
         req.raise_for_status()
         return req.json()
 
-    def render(self, args, data):
-        return data.get('projects', [])
+
+class SetQuotas(Endpoint):
+    """Configures a project quotas.
+    """
+
+    compute_tres = ('cpu', 'gpu', 'mem', 'fpga')
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'set-quotas')
+        # Project name
+        self.parser.add_argument('name', type=str, help='Project name')
+        # Compute quotas
+        for tres in self.compute_tres:
+            self.parser.add_argument(f'--{tres}', dest=f'{tres}_mins',
+                type=int, default=-1, help=f'{tres.upper()} quota in minutes')
+        # SharedFS quotas
+        self.parser.add_argument('--tier', type=int, default=-1, choices=(1, 2), help='SharedFS tier')
+        self.parser.add_argument('--kbytes', type=int, default=-1, help='SharedFS disk quotas in Kbytes')
+        self.parser.add_argument('--inodes', type=int, default=-1, help='SharedFS inodes quotas')
+
+    def target_compute(self, args):
+        """Sets compute quotas (if any)
+        """
+        jsdata = {}
+        # Prepare
+        for tres in self.compute_tres:
+            if getattr(args, f'{tres}_mins', -1) >= 0:
+                jsdata[f'{tres}_mins'] = getattr(args, f'{tres}_mins')
+        # Proceed
+        if len(jsdata) > 0:
+            req = self.session.post(
+                f'{self.url}/projects/{args.name}/quotas/compute',
+                json=jsdata
+            )
+            req.raise_for_status()
+            return req.json()
+        return {}
+
+    def target_sharedfs(self, args):
+        """Sets shared file system quotas (if any)
+        """
+        # Check if a SharedFS quota is being requested
+        if args.tier > 0 or args.kbytes >= 0 or args.inodes >= 0:
+            # Block invalid argument set
+            if args.tier not in (1, 2) or args.kbytes < 0 or args.inodes < 0:
+                print(
+                    dedent('''\
+                        --tier must be 1 or 2 and requires --kbytes and --inodes
+                        --kbytes must be >= 0 and requires --tier and --inodes
+                        --inodes must be >= 0 and requires --tier and --kbytes
+                    '''),
+                    file=sys.stderr
+                )
+                sys.exit(1)
+            # Proceed
+            req = self.session.post(
+                f'{self.url}/projects/{args.name}/quotas/sharedfs',
+                json={
+                    'tier': args.tier,
+                    'kbytes': args.kbytes,
+                    'inodes': args.inodes
+                }
+            )
+            req.raise_for_status()
+            return req.json()
+        return {}
+
+    def target(self, args):
+        result = {}
+        for name, func in {
+            'compute': self.target_compute,
+            'sharedfs': self.target_sharedfs
+        }.items():
+            try:
+                result[name] = func(args)
+            except Exception as error:
+                result[name] = str(error)
+        return result
 
 
 class Report(Endpoint):
@@ -185,19 +277,87 @@ class Report(Endpoint):
 
 
 class AddUser(SimpleEndpoint):
-    """Add user to a project.
+    """Add user(s) to a project.
     """
 
     def __init__(self, subparser):
         super().__init__(subparser, 'add-user', 'POST', 'projects/{project}/users')
         self.parser.add_argument('project', type=str, help='Project name')
-        self.parser.add_argument('--users', type=str, nargs='+', default=[], help='List of user names')
+        self.parser.add_argument('-m' ,'--members', type=str, nargs='+', default=[], help='List of user names')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
 
     def target(self, args):
         req = self.session.post(
             f'{self.url}/projects/{args.project}/users',
             json={
-                'members': args.users
+                'members': args.members
+            }
+        )
+        self.handle_status(args, req)
+        return req.json()
+
+
+class AddCoordinator(SimpleEndpoint):
+    """Add coordinator(s) to a project.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'add-coord', 'POST', 'projects/{project}/coordinators')
+        self.parser.add_argument('project', type=str, help='Project name')
+        self.parser.add_argument('-m' ,'--members', type=str, nargs='+', default=[], help='List of coordinators names')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
+
+    def target(self, args):
+        req = self.session.post(
+            f'{self.url}/projects/{args.project}/coordinators',
+            json={
+                'members': args.members
+            }
+        )
+        self.handle_status(args, req)
+        return req.json()
+
+
+class DelUser(SimpleEndpoint):
+    """Remove user(s) from a project.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'del-user', 'DELETE', 'projects/{project}/users')
+        self.parser.add_argument('project', type=str, help='Project name')
+        self.parser.add_argument('-m' ,'--members', type=str, nargs='+', default=[], help='List of user names')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
+
+    def target(self, args):
+        req = self.session.delete(
+            f'{self.url}/projects/{args.project}/users',
+            json={
+                'members': args.members
+            }
+        )
+        self.handle_status(args, req)
+        return req.json()
+
+
+class DelCoordinator(SimpleEndpoint):
+    """Remove coordinator(s) from a project.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'del-coord', 'DELETE', 'projects/{project}/coordinators')
+        self.parser.add_argument('project', type=str, help='Project name')
+        self.parser.add_argument('-m' ,'--members', type=str, nargs='+', default=[], help='List of coordinators names')
+        # Update default output format
+        self.parser.set_defaults(outform='yaml')
+
+    def target(self, args):
+        req = self.session.delete(
+            f'{self.url}/projects/{args.project}/coordinators',
+            json={
+                'members': args.members
             }
         )
         self.handle_status(args, req)

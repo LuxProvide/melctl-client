@@ -48,9 +48,14 @@ endpoints = {
         projects.Projects,
         projects.Get,
         projects.Create,
-        projects.Setup,
+        # projects.Setup,
         projects.Report,
-        projects.AddUser
+        projects.AddUser,
+        projects.AddCoordinator,
+        projects.DelUser,
+        projects.DelCoordinator,
+        projects.AddSharedFS,
+        projects.SetQuotas
     ],
     'users': [
         users.List,
