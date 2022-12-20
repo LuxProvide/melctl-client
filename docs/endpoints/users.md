@@ -2,13 +2,15 @@
 
 Manage MeluXina users.
 
+\[TOC\]
+
 ## Usage
 
 ```shell
-melctl users {list,get,s3-status,s3-setup} [common args]
+melctl users {list,get,create,s3-status,s3-setup,s3-disable} [common args]
 ```
 
-### List all users
+### `list` - List all users
 
 ```shell
 melctl users list [common args]
@@ -58,7 +60,7 @@ Example return as YAML (truncated):
   uid: 15019
 ```
 
-### Get a user information
+### `get` - Get a user information
 
 ```shell
 melctl users get <name> [common args]
@@ -105,7 +107,30 @@ Example return as YAML:
   uid: 15019
 ```
 
-### Get an user S3 status
+### `create` - Create an user
+
+```shell
+melctl users create \
+    --email MAIL --firstname FIRSTNAME --lastname LASTNAME \
+    [--name NAME --uid UID --gid GID] \
+    [--phone PHONE]
+```
+
+Example to create a _customer_ new user (UID will be generated automatically):
+
+```shell
+melctl users create --email 'john.doe@fbi.gov.us' --firstname 'John' --lastname 'Doe' --phone '+0011223344'
+```
+
+Example to create a new _internal_ user:
+
+```shell
+melctl users create \
+    --email 'john.doe@fbi.gov.us' --firstname 'John' --lastname 'Doe' \
+    --name 'jdoe' --uid 15000 --gid 555
+```
+
+### `s3-status` - Get an user S3 status
 
 ```shell
 melctl users s3-status <name> [common args]
@@ -133,7 +158,7 @@ Example return as YAML:
   uuid: 1337c6de830200667ef2c5c16c9959c1c03d2405
 ```
 
-### Set user S3 access
+### `s3-setup` Set user S3 access
 
 ```shell
 melctl users s3-setup <name> [--paths <path>, ...]

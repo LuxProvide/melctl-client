@@ -2,13 +2,15 @@
 
 Manage MeluXina projects.
 
+\[TOC\]
+
 ## Usage
 
 ```shell
-melctl projects {list,get,report} [common args]
+melctl projects {list,get,create,report,add-user,add-coord,del-user,del-coord,add-sharedfs,set-quotas} [common args]
 ```
 
-### List all projects
+### `list` - List all projects
 
 ```shell
 melctl projects list [common args]
@@ -40,7 +42,7 @@ Example return as YAML (truncated):
   - ...
 ```
 
-### Get a project information
+### `get` - Get a project
 
 ```shell
 melctl projects get <name> [common args]
@@ -82,12 +84,36 @@ Example return as YAML (truncated):
   - ...
 ```
 
-### Get projects resource usage
+### `create` - Create a project
+
+```shell
+melctl projects create -p,--parent PARENT [[--name NAME] [--uid UID]]
+```
+
+Example to create a new EuroHPC project (name and UID are automatically generated):
+
+```shell
+melctl projects create -p eurohpc
+```
+
+Example to create a new Luxembourg project (name and UID are automatically generated):
+
+```shell
+melctl projects create -p luxembourg
+```
+
+Example to create a custom project with UID/GID `200999` named `lxp200999`:
+
+```shell
+melctl projects create -p lxp --uid 200999 --name lxp200999
+```
+
+### `report` - Get projects resource usage
 
 ```shell
 melctl projects report [name] \
     [-r,--rangetime lastmonth] \
-    [-s,--starttime TIME_START>] \
+    [-s,--starttime TIME_START] \
     [-e,--endtime TIME_END] \
     [--time-unit s,sec,secs,second,seconds,m,min,mins,minute,minutes,h,hrs,hour,hours]
 ```
@@ -134,12 +160,99 @@ Example return as YAML (truncated):
   name: melsupp
 ```
 
-### Create a project
+### `add-user` - Add users to a project
 
-TODO
+```shell
+melctl projects add-user PROJECT -m USER [USER ...]
+```
 
-### Setup a project
+Example to add users `u100001` and `u100002` to project `p200001`:
 
-TODO
+```shell
+melctl projects add-user p200001 -m u100001 u100002
+```
+
+### `add-coord` - Add coordinators to a project
+
+```shell
+melctl projects add-coord PROJECT -m USER [USER ...]
+```
+
+Example to add coordinators `u100001` and `u100002` to project `p200001`:
+
+```shell
+melctl projects add-coord p200001 -m u100001 u100002
+```
+
+### `del-user` - Remove users from a project
+
+```shell
+melctl projects del-user PROJECT -m USER [USER ...]
+```
+
+Example to remove users `u100001` and `u100002` from project `p200001`:
+
+```shell
+melctl projects del-user p200001 -m u100001 u100002
+```
+
+### `del-coord` - Remove coordinators from a project
+
+```shell
+melctl projects del-coord PROJECT -m USER [USER ...]
+```
+
+Example to remove coordinators `u100001` and `u100002` from project `p200001`:
+
+```shell
+melctl projects del-coord p200001 -m u100001 u100002
+```
+
+### `add-sharedfs` - Add shared file system tier to a project
+
+```shell
+melctl projects add-sharedfs PROJECT --tier TIER --owner USER
+```
+
+Example to add a tier 2 shared filesystem directory owned by user `u100001`
+to project `p200001`:
+
+```shell
+melctl projects add-sharedfs p200001 --tier 2 --owner u100001
+```
+
+### `set-quotas` - Set a project quotas
+
+```shell
+melctl projects set-quotas PROJECT \
+    [--tier TIER --kbytes KBYTES --inodes INODES] \
+    [--cpu MINUTES] \
+    [--gpu MINUTES] \
+    [--mem MINUTES] \
+    [--fpga MINUTES] \
+```
+
+Example to set both tier 2 and GPU quotas:
+
+```shell
+melctl projects set-quotas p200001 \
+    --tier 2 --kbytes 1048576000 --inodes 1000000 \
+    --gpu $((3000*60))
+```
+
+Example to set tier 2 quotas:
+
+```shell
+melctl projects set-quotas p200001 \
+    --tier 2 --kbytes 1048576000 --inodes 1000000
+```
+
+Example to set CPU and FPGA quotas:
+
+```shell
+melctl projects set-quotas p200001 \
+    --cpu $((1000*60))
+    --fpga $((3000*60))
+```
 
 ---
