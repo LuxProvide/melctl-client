@@ -113,31 +113,39 @@ Some arguments are common for most endpoints and endpoints's actions:
 
 ### Endpoints
 
-| Endpoint   | Action      | Description                            | Documentation                        |
-| ---------- | ----------- | -------------------------------------- | ------------------------------------ |
-| `ping`     | -           | Ping the MelCtl API server             | [Link](./docs/endpoints/ping.md)     |
-| `version`  | -           | Print MelCtl client and server version | [Link](./docs/endpoints/version.md)  |
-| `config`   | `show`      | Show the client configuration          | [Link](./docs/endpoints/config.md)   |
-| `config`   | `init`      | Initialize a new default configuration | [Link](./docs/endpoints/config.md)   |
-| `login`    | `user`      | Login / get an user token              | [Link](./docs/endpoints/login.md)    |
-| `login`    | `admin`     | Login / get an admin token             | [Link](./docs/endpoints/login.md)    |
-| `login`    | `info`      | Get login / token information          | [Link](./docs/endpoints/login.md)    |
-| `curl`     | -           | Performs low-level API call            | [Link](./docs/endpoints/curl.md)     |
-| `tasks`    | `list`      | List available tasks                   | [Link](./docs/endpoints/tasks.md)    |
-| `tasks`    | `queued`    | List queued and running tasks          | [Link](./docs/endpoints/tasks.md)    |
-| `tasks`    | `status`    | Get a task status                      | [Link](./docs/endpoints/tasks.md)    |
-| `tasks`    | `get`       | Get a task result                      | [Link](./docs/endpoints/tasks.md)    |
-| `tasks`    | `submit`    | Runs a new task                        | [Link](./docs/endpoints/tasks.md)    |
-| `projects` | `list`      | List all projects                      | [Link](./docs/endpoints/projects.md) |
-| `projects` | `get`       | Get one or more project information    | [Link](./docs/endpoints/projects.md) |
-| `projects` | `report`    | Reports one or all projects usage      | [Link](./docs/endpoints/projects.md) |
-| `users`    | `list`      | List users                             | [Link](./docs/endpoints/users.md)    |
-| `users`    | `get`       | Get a specific user                    | [Link](./docs/endpoints/users.md)    |
-| `users`    | `s3-status` | Get an user S3 access                  | [Link](./docs/endpoints/users.md)    |
-| `users`    | `s3-setup`  | Setup an user S3 access                | [Link](./docs/endpoints/users.md)    |
-| `s3ds`     | `list`      | List S3 access keys                    | [Link](./docs/endpoints/s3ds.md)     |
-| `s3ds`     | `setup`     | Create and configure S3 accesses keys  | [Link](./docs/endpoints/s3ds.md)     |
-| `s3ds`     | `disable`   | Disable S3 accesses keys               | [Link](./docs/endpoints/s3ds.md)     |
+| Endpoint   | Action         | Description                            | Documentation                        |
+| ---------- | -------------- | -------------------------------------- | ------------------------------------ |
+| `ping`     | -              | Ping the MelCtl API server             | [Link](./docs/endpoints/ping.md)     |
+| `version`  | -              | Print MelCtl client and server version | [Link](./docs/endpoints/version.md)  |
+| `config`   | `show`         | Show the client configuration          | [Link](./docs/endpoints/config.md)   |
+| `config`   | `init`         | Initialize a new default configuration | [Link](./docs/endpoints/config.md)   |
+| `login`    | `user`         | Login / get an user token              | [Link](./docs/endpoints/login.md)    |
+| `login`    | `admin`        | Login / get an admin token             | [Link](./docs/endpoints/login.md)    |
+| `login`    | `info`         | Get login / token information          | [Link](./docs/endpoints/login.md)    |
+| `curl`     | -              | Performs low-level API call            | [Link](./docs/endpoints/curl.md)     |
+| `tasks`    | `list`         | List available tasks                   | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `queued`       | List queued and running tasks          | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `status`       | Get a task status                      | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `get`          | Get a task result                      | [Link](./docs/endpoints/tasks.md)    |
+| `tasks`    | `submit`       | Runs a new task                        | [Link](./docs/endpoints/tasks.md)    |
+| `projects` | `list`         | List all projects                      | [Link](./docs/endpoints/projects.md) |
+| `projects` | `get`          | Get one or more project information    | [Link](./docs/endpoints/projects.md) |
+| `projects` | `create`       | Create a project                       | [Link](./docs/endpoints/projects.md) |
+| `projects` | `report`       | Reports one or all projects usage      | [Link](./docs/endpoints/projects.md) |
+| `projects` | `add-user`     | Add users to a project                 | [Link](./docs/endpoints/projects.md) |
+| `projects` | `add-coord`    | Add coordinators to a project          | [Link](./docs/endpoints/projects.md) |
+| `projects` | `del-user`     | Remove users from a project            | [Link](./docs/endpoints/projects.md) |
+| `projects` | `del-coord`    | Remove coordinators from a project     | [Link](./docs/endpoints/projects.md) |
+| `projects` | `add-sharedfs` | Add a shared fs tier to a project      | [Link](./docs/endpoints/projects.md) |
+| `projects` | `set-quotas`   | Set a project quotas                   | [Link](./docs/endpoints/projects.md) |
+| `users`    | `list`         | List users                             | [Link](./docs/endpoints/users.md)    |
+| `users`    | `get`          | Get a specific user                    | [Link](./docs/endpoints/users.md)    |
+| `users`    | `create`       | Create an user                         | [Link](./docs/endpoints/users.md)    |
+| `users`    | `s3-status`    | Get an user S3 access                  | [Link](./docs/endpoints/users.md)    |
+| `users`    | `s3-setup`     | Setup an user S3 access                | [Link](./docs/endpoints/users.md)    |
+| `s3ds`     | `list`         | List S3 access keys                    | [Link](./docs/endpoints/s3ds.md)     |
+| `s3ds`     | `setup`        | Create and configure S3 accesses keys  | [Link](./docs/endpoints/s3ds.md)     |
+| `s3ds`     | `disable`      | Disable S3 accesses keys               | [Link](./docs/endpoints/s3ds.md)     |
 
 ### JQ scripting
 
