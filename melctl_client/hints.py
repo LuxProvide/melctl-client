@@ -8,7 +8,8 @@ from .config import settings
 
 
 class Hinter:
-    """Base hinter class."""
+    """Base hinter class.
+    """
 
     # Hint messages colors control codes
     level_colors: dict = {
@@ -19,10 +20,13 @@ class Hinter:
     }
 
     # Regex to match localhost
-    localhost_rex: re.Pattern = re.compile(r'.*(127|localhost).*')
+    localhost_rex: re.Pattern = re.compile(r'^(127\.|localhost).*')
 
     def hint_files(self, args: Namespace):
-        """Check the configuration file."""
+        """Check the configuration file status.
+
+        :param args: Parsed arguments
+        """
         if not os.path.isfile(settings.Config.env_file):
             yield (
                 "warning",
@@ -30,7 +34,10 @@ class Hinter:
             )
 
     def hint_variables(self, args: Namespace):
-        """Check the configuration values."""
+        """Check the configuration values.
+
+        :param args: Parsed arguments
+        """
         # URL format
         msg_url = (
             "warning",
@@ -50,6 +57,7 @@ class Hinter:
     def print_hint(self, args: Namespace, level: str, msg: str):
         """Print a hint.
 
+        :param args: Parsed arguments
         :param level Hint level:
         :param msg: Hint content
         """
@@ -66,7 +74,7 @@ class Hinter:
     def __call__(self, args: Namespace):
         """Run all hints.
 
-        :param args: Parsed arguments.
+        :param args: Parsed arguments
         """
         _hinted = False
         for hinter in [

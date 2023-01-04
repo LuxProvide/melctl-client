@@ -1,66 +1,57 @@
+import importlib
+import pkgutil
 import argparse
 
 # Disable Pydantic warnings
 import warnings
-
 warnings.filterwarnings('ignore')
 
-from .endpoints import endpoints
+# MelCtl plugins packages
+import melctl_client_plugins
+
 from .hints import Hinter
 
 
-def load_endpoints(subparser):
-    """Loads and initializes MelCtl endpoints.
+def load_commands(commands, subparser):
+    """Loads and initializes MelCtl commands.
 
-    :param subparser: Argparse's subparser.
+    :param subparser: Argparse's subparser
     """
-    # Endpoints parsers, subparsers and instances
-    endpoints_parsers = []
-    endpoints_subparsers = []
-    endpoints_instances = []
-    # Endpoints parsers, subparsers and instances initialization
-    for endpoint_name, endpoints_actions in endpoints.items():
-        # For endpoint in form 'melctl <endpoint> <action> ...':
-        if isinstance(endpoints_actions, (list, tuple, set)):
-            endpoints_parsers.append(subparser.add_parser(endpoint_name))
-            endpoints_subparsers.append(
-                endpoints_parsers[-1].add_subparsers(dest='action')
+    # Commands parsers, subparsers and instances
+    commands_parsers = []
+    commands_subparsers = []
+    commands_instances = []
+    # Commands parsers, subparsers and instances initialization
+    for command_name, commands_actions in commands.items():
+        # For command in form 'melctl <command> <action> ...':
+        if isinstance(commands_actions, (list, tuple, set)):
+            commands_parsers.append(subparser.add_parser(command_name))
+            commands_subparsers.append(
+                commands_parsers[-1].add_subparsers(dest='action')
             )
-            for endpoint_action in endpoints_actions:
-                endpoints_instances.append(endpoint_action(endpoints_subparsers[-1]))
-                endpoints_subparsers[-1].required = True
-        # For endpoint in form 'melctl <endpoint> ...':
+            for command_action in commands_actions:
+                commands_instances.append(command_action(commands_subparsers[-1]))
+                commands_subparsers[-1].required = True
+        # For command in form 'melctl <command> ...':
         else:
-            endpoints_instances.append(endpoints_actions(subparser))
+            commands_instances.append(commands_actions(subparser))
     # Done
-    return endpoints_parsers, endpoints_subparsers, endpoints_instances
+    return commands_parsers, commands_subparsers, commands_instances
 
 
-class API:
-    """Simple Python API wrapper.
+def load_plugins(subparser, pkgs: list = [melctl_client_plugins,]):
+    """Load MelCtl client plugins.
+
+    :param subparser: Argparse's subparser
+    :param pkgs: Packages to load plugins from
     """
-
-    def __init__(self, blocking: bool = True):
-        # Args override
-        self.args = {
-            'outform': 'raw',
-            'wait': blocking
-        }
-        # Root parser and subparser
-        self.parser = argparse.ArgumentParser('melctl')
-        self.subparser = self.parser.add_subparsers(dest='endpoint')
-        self.subparser.required = True
-        # Load and init endpoints
-        _, _, self.endpoints = load_endpoints(self.subparser)
-
-    def __call__(self, endpoint, *args):
-        # Parse
-        args = self.parser.parse_args(args=[endpoint, ] + list(args))
-        # Update args
-        for k, v in self.args.items():
-            setattr(args, k, v)
-        # Run
-        return args.func(args)
+    for pkg in pkgs:
+        for _, name, _ in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
+            # Import plugin
+            plugin = importlib.import_module(name)
+            # Load plugin commands
+            if hasattr(plugin, 'commands'):
+                load_commands(plugin.commands, subparser)
 
 
 def main():
@@ -68,11 +59,11 @@ def main():
     """
     # Root parser and subparser
     parser = argparse.ArgumentParser('melctl')
-    subparser = parser.add_subparsers(dest='endpoint')
+    subparser = parser.add_subparsers(dest='command')
     subparser.required = True
-    # Load and init endpoints
-    endpoints_parsers, endpoints_subparsers, endpoints_instances = load_endpoints(subparser)
-    # Parse arguments, run hints and invoke endpoint
+    # Load and init plugins & commands
+    load_plugins(subparser)
+    # Parse arguments, run hints and invoke command
     args = parser.parse_args()
     Hinter()(args)
     args.func(args)
