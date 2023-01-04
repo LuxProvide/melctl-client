@@ -1,8 +1,17 @@
 <!-- vim: set ft=2 ts=Markdown -->
 
-# MelCtl - Server - Releases notes
+# MelCtl - Client - Releases notes
 
 \[TOC\]
+
+---
+
+## v5 ~ _Pedantic Santa_
+
+### Changes
+
+* Support for MelCtl server 5
+* Moved towards a plugin architecture on the client side too
 
 ---
 
