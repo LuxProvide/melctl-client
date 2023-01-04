@@ -1,4 +1,4 @@
-# MelCtl - Client - Login
+# Login
 
 Login and obtain MelCtl tokens.
 

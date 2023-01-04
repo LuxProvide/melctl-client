@@ -1,4 +1,4 @@
-# MelCtl - Client - Curl
+# Curl
 
 Performs raw HTTP call to MelCtl API.
 

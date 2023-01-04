@@ -1,4 +1,4 @@
-# MelCtl - Client - Config
+# Config
 
 Show and generate the `melctl` client configuration.
 

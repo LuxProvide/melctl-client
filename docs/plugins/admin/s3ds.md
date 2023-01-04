@@ -1,17 +1,17 @@
-# MelCtl - Client - S3
+# S3DS
 
 Manage S3DS.
 
 ## Usage
 
 ```shell
-melctl users {list,setup,disable} [common args]
+melctl s3ds {list,setup,disable} [common args]
 ```
 
 ### List access keys
 
 ```shell
-melctl s3 list [common args]
+melctl s3ds list [common args]
 ```
 
 Example return as table (truncated):
@@ -49,7 +49,7 @@ Example return as YAML (truncated):
 > See [the endpoint documentation](./users.md)  
 
 ```
-melctl s3 setup <username> --uid <uid> --gid <gid> --paths <path> [path, ...]
+melctl s3ds setup <username> --uid <uid> --gid <gid> --paths <path> [path, ...]
 ```
 
 Example return as table:

@@ -1,8 +1,6 @@
-# MelCtl - Client - Users
+# Users
 
 Manage MeluXina users.
-
-\[TOC\]
 
 ## Usage
 

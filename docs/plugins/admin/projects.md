@@ -1,8 +1,6 @@
-# MelCtl - Client - Projects
+# Projects
 
 Manage MeluXina projects.
-
-\[TOC\]
 
 ## Usage
 

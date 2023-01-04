@@ -1,4 +1,4 @@
-# MelCtl - Client - Ping
+# Ping
 
 Ping the MelCtl API server.
 

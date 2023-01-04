@@ -1,0 +1,50 @@
+site_name: MelCtl - Client
+
+nav:
+  - Installation & upgrade: installation.md
+  - Configuration: config.md
+  - Usage:
+      - Overview: usage.md
+      - Commands: commands.md
+  - Plugins:
+    - Overview: plugins/index.md
+    - Builtins:
+        - plugins/builtins/config.md
+        - plugins/builtins/ping.md
+        - plugins/builtins/version.md
+    - Customer: []
+    - Admin:
+        - plugins/admin/curl.md
+        - plugins/admin/login.md
+        - plugins/admin/projects.md
+        - plugins/admin/s3ds.md
+        - plugins/admin/tasks.md
+        - plugins/admin/users.md
+
+theme:
+  name: material
+  logo: assets/melctl-client.png
+  favicon: assets/melctl-client.png
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue grey
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+
+markdown_extensions:
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.keys
+  - tables
+  - attr_list

@@ -1,7 +1,9 @@
-# MelCtl - Client - Config
+# Configuration
 
 The `melctl` client can be configured via command line arguments and via a
 configuration file.
+
+## Configurable items
 
 | Argument       | Config key   | Description                     |
 | -------------- | ------------ | ------------------------------- |
@@ -16,7 +18,7 @@ MelCTL client has two configuration sources:
 * The secrets directory (stores tokens)
 
 You can generate the configuration assets using `melctl config init`.
-See [endpoint/config.md](./endpoints/config.md)
+See [plugins/builtins/config](./plugins/builtins/config.md)
 
 If no configuration is found, `melctl` will complain when invoked.
 
@@ -24,14 +26,20 @@ If no configuration is found, `melctl` will complain when invoked.
 
 The configuration file is located from:
 
-* 1 - Environment varibale `MELCTL_CLI_CONFIG`
+* 1 - Environment variable `MELCTL_CLI_CONFIG`
 * 2 - File `~/.melctl-cli.env`
+
+The following configuration attributes are supported:
+
+| Attribute | Type     | Default                 | Description           |
+| --------- | -------- | ----------------------- | --------------------- |
+| `url`     | `string` | `http://127.0.0.1:8888` | MelCtl API server URL |
 
 ### Secrets
 
 The secrets directory is located from:
 
-* 1 - Environment varibale `MELCTL_CLI_SECRETS`
+* 1 - Environment variable `MELCTL_CLI_SECRETS`
 * 2 - Directory `~/.melctl-secrets`
 
 ---

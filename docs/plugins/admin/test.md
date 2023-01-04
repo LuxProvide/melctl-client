@@ -1,4 +1,4 @@
-# MelCtl - Client - Test
+# Test
 
 Test the MelCtl API server APIs.
 
