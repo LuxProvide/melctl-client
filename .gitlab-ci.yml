@@ -3,6 +3,7 @@
 
 stages:
   - build
+  - deploy
 
 
 build_client:
@@ -20,3 +21,26 @@ build_client:
       python3 -m twine upload
       --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi 
       dist/*
+
+
+pages:
+  stage: deploy
+  image: python:3.10-slim
+  before_script:
+    - >
+      pip install
+        mkdocs
+        mkdocs-macros-plugin
+        mkdocs-material
+        mkdocs-material-extensions
+  script:
+  - >
+    mkdocs build
+      --verbose
+      --site-dir public
+  artifacts:
+    paths:
+    - public
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ /^(main)/
+
