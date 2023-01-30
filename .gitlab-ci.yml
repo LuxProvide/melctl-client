@@ -19,7 +19,7 @@ build_client:
       TWINE_PASSWORD=${CI_JOB_TOKEN}
       TWINE_USERNAME=gitlab-ci-token
       python3 -m twine upload
-      --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi 
+      --repository-url ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/pypi
       dist/*
 
 
@@ -34,7 +34,7 @@ pages:
         mkdocs-material \
         mkdocs-material-extensions
   script:
-  - mkdocs build --verbose --site-dir public
+  - mkdocs build --config-file mkdocs.yml --verbose --site-dir public
   artifacts:
     paths:
     - public
