@@ -10,7 +10,7 @@ packages using `pip` or from source.
 * MelCtl and its plugins may optionally be installed in a virtual environment:
     * Create a virtual environment: `python3 -m venv <venv name>`
     * Activate the virtual environment: `source <venv path>/bin/activate`
-* If you are frequently updating MelCtl, you install install it in _editable mode_ (`pip install -e ...`)
+* If you are frequently updating MelCtl, you may install it in _editable mode_ (`pip install -e ...`)
 
 ## LuxProvide customers
 
@@ -20,7 +20,7 @@ packages using `pip` or from source.
 * Python's `pip`
 * Git client (when installing or upgrading from source)
 
-### Python package
+### Installation from the Python package
 
 Install `melctl-client` and the plugins:
 
@@ -34,7 +34,7 @@ Upgrade `melctl-client` and the plugins:
 pip3 install --upgrade melctl-client melctl-client-plugins-customer
 ```
 
-### From source
+### Installation from source
 
 Clone the public repositories:
 
@@ -76,7 +76,7 @@ pip3 install --upgrade ./melctl-client ./melctl-client-plugins-customer
     * Replace `<PAT>` with your GitLab PAT (i.e. `glpat-a1b2c3d4...`)
     * Do **not** replace `__token__`
 
-### Python package
+### Installation from the Python package
 
 Install `melctl-client`:
 
@@ -96,7 +96,7 @@ Install the customer plugins:
 pip3 install --index-url https://__token__:<PAT>@gitlab.lxp.lu/api/v4/projects/179/packages/pypi/simple melctl-client-plugins-customer
 ```
 
-### From source
+### Installation from source
 
 Clone the internal repositories:
 

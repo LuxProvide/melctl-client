@@ -2,6 +2,7 @@
 
 ## Builtins
 
+<!-- Keep it synced with commands-public.md -->
 | Command   | Action | Description                            | Documentation                         |
 | --------- | ------ | -------------------------------------- | ------------------------------------- |
 | `ping`    | -      | Ping the MelCtl API server             | [Link](./plugins/builtins/ping.md)    |
@@ -11,11 +12,13 @@
 
 ## Customer
 
+<!-- Keep it synced with commands-public.md -->
 | Command   | Action | Description                            | Documentation                         |
 | --------- | ------ | -------------------------------------- | ------------------------------------- |
 
 ## Admin
 
+<!-- DO NOT keep it synced with commands-public.md -->
 | Command    | Action         | Description                           | Documentation                       |
 | ---------- | -------------- | ------------------------------------- | ----------------------------------- |
 | `curl`     | -              | Performs low-level API call           | [Link](./plugins/admin/curl.md)     |

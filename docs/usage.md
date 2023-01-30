@@ -43,7 +43,7 @@ Some arguments are common to most commands and command's actions:
 * `-a AUTH`, `--auth AUTH`: Select the authentication token (e.g. `Bearer <JWT>`)
 * `-u URL`, `--url URL`: Select the API server base URL (e.g. `http://host.tld:port`)
 * `-v VERSION`, `--version VERSION`: Select the API endpoint version (e.g. `v1`)
-* `-o FORMAT`, `--output-format FORMAT`: Select the command outpout format
+* `-o FORMAT`, `--output-format FORMAT`: Select the command output format
     * `table`: Format output as table
     * `wide`: Format output as table with all available fields
     * `json`: Format output as JSON document
@@ -51,17 +51,17 @@ Some arguments are common to most commands and command's actions:
 
 ## JQ scripting
 
-`jq` parses and filters JSON document. MelCtl can be piped into `jq`:
+`jq` parses and filters JSON documents. MelCtl can be piped into `jq`:
 
 ```shell
-melctl <command> [action] [arguments] --nocolor -o json 2>/dev/null | jq [filter]
+melctl <command> [action] [arguments] --nocolor -o json 2>/dev/null | jq <script>
 ```
 
 Where:
 
 * `--nocolor` disable MelCtl colored output
 * `-o json` renders MelCtl output as JSON
-* `filter` is the JQ filter(s) to apply
+* `script` is the JQ script to apply
 
 ### Render output using JQ
 
@@ -69,9 +69,9 @@ Where:
 melctl users list --nocolor -o json 2>/dev/null | jq 
 ```
 
-### Using JQ on list of objects
+### Using JQ on a list of objects
 
-If MelCtl JSON output is a list of object like:
+If MelCtl JSON output is a list of objects like:
 
 ```json
 [
@@ -97,6 +97,9 @@ Use filters like this:
 ```shell
 # Select all objects name
 ... | jq '.[].name'
+
+# Filer empty values
+... | jq '.[] | select(.email != null) | select(.email | match("jpclipffel"))'
 
 # Select all objects with S3DS content
 ... | jq '.[] | select((.s3ds | length) > 0)'

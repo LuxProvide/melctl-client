@@ -15,7 +15,9 @@ See [docs/config.md](docs/config.md)
 ## Usage
 
 * Overview: [docs/usage.md](docs/usage.md)
-* Commands reference: [docs/commands.md](docs/commands.md)
+* Commands reference:
+  * Public: [docs/commands-public.md](docs/commands-public.md)
+  * Internal [docs/commands.md](docs/commands.md)
 
 ## Plugins
 
