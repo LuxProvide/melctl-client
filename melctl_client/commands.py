@@ -1,10 +1,47 @@
+# BSD 3-Clause License
+# 
+# Copyright (c) 2023, LuxProvide S.A.
+# 
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+# 
+# 1. Redistributions of source code must retain the above copyright notice, this
+#    list of conditions and the following disclaimer.
+# 
+# 2. Redistributions in binary form must reproduce the above copyright notice,
+#    this list of conditions and the following disclaimer in the documentation
+#    and/or other materials provided with the distribution.
+# 
+# 3. Neither the name of the copyright holder nor the names of its
+#    contributors may be used to endorse or promote products derived from
+#    this software without specific prior written permission.
+# 
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
+
+# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+__email__      = 'jean-philippe.clipffel@lxp.lu'
+__author__     = 'Jean-Philippe Clipffel <jean-philippe.clipffel@lxp.lu>'
+__license__    = 'BSD-3-Clause'
+__copyright__  = 'Copyright (c) 2023 LuxProvide S.A.'
+__maintainer__ = 'Jean-Philippe Clipffel'
+
+
 import time
 import json
 import yaml
+import logging
 import tabulate
 import requests
-
-import logging
+import traceback
 
 from pygments import highlight
 from pygments.lexers import JsonLexer, YamlLexer
@@ -71,7 +108,7 @@ class Command:
         # Output format
         self.parser.add_argument('-o', '--output-format', dest='outform',
             type=str.lower, default='table', help='Output format', choices=[
-                'table', 'json', 'yaml', 'wide', 'keys'
+                'table', 'json', 'yaml', 'wide', 'keys', 'raw'
             ])
         # Output color
         self.parser.add_argument('--nocolor', dest='nocolor', action='store_true',
@@ -104,9 +141,9 @@ class Command:
         # ---
         # (re)format data to make it pretty-printable 
         if isinstance(headers, (list, set, tuple)) and len(_data) > 0:
+            fields = []
             # List of dicts
             if isinstance(_data, (list, tuple, set)) and isinstance(_data[0], dict):
-                fields = []
                 for d in _data:
                     fields.append([d.get(field) for field in headers])
         else:
@@ -118,9 +155,8 @@ class Command:
     def format_wide(self, args, data):
         """Formats output as a wide table (all fields)
         """
-        if len(data) > 0:
-            if isinstance(data[0], dict):
-                print(tabulate.tabulate(data, headers='keys'))
+        self.headers = 'keys'
+        self.format_table(args, data)
 
     def format_json(self, args, data):
         """Formats output as a JSON string.
@@ -147,6 +183,7 @@ class Command:
             ))
 
     def format_raw(self, args, data):
+        print(data)
         return data
 
     def format(self, args, data):
@@ -161,6 +198,20 @@ class Command:
                 'keys': self.format_wide,
                 'raw': self.format_raw
             }[args.outform](args, data)
+
+    def format_error(self, args, error: Exception):
+        """Format and print an error.
+
+        :param args: Parsed command line arguments
+        :param error: Exception
+        """
+        data = {
+            'error': str(error)
+        }
+        if args.traceback:
+            data['traceback'] = traceback.format_exc()
+        # Format and print
+        self.format(args, data)
 
     def wait_task(self, task_id: str, frequency: int, timeout: int):
         """Waits for a task to completes.
@@ -217,9 +268,10 @@ class Command:
                 return self.format(args, self.render(args, data))
         except Exception as error:
             if args.traceback:
-                raise
+                self.logger.exception(error)
             else:
-                print(error)
+                self.logger.error(str(error))
+            self.format_error(args, error)
 
     def target(self, args):
         """Command entry point.
