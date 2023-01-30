@@ -35,5 +35,5 @@ __copyright__  = 'Copyright (c) 2023 LuxProvide S.A.'
 __maintainer__ = 'Jean-Philippe Clipffel'
 
 
-__version__ = '5.2.0'
+__version__ = '5.2.1'
 __version_name__ = 'Pedantic Santa'
