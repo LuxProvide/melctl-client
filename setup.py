@@ -36,15 +36,53 @@ __maintainer__ = 'Jean-Philippe Clipffel'
 
 
 from setuptools import setup, find_packages, find_namespace_packages
+from textwrap import dedent
 
 from melctl_client import __version__
 
 
 setup(
     name='melctl_client',
-    author='@jpclipffel',
-    url='https://gitlab.lxp.lu/lxp-hpc/iac/meluxina/melctl-client',
+    author='jpclipffel',
+    url='https://github.com/LuxProvide/melctl-client',
     version=__version__,
+    description='Command-line client for LuxProvide API (MelCtl)',
+    long_description=dedent('''\
+        This package provides the base MelCtl command-line client.
+
+        - Documentation_
+        - Repository_
+
+        About MelCtl
+        ============
+
+        MelCtl provides a set of APIs to interact with LuxProvide_'s HPC (High
+        Performance Computer) and Cloud services.
+
+        The MelCtl command-line client allows our customers and internal users
+        to interact with MelCtl APIs.
+
+        The base package (`MelCtl client`_) provides basic plugins
+        (e.g. authentication). Supplementary packages such as
+        `melctl_client_plugins_customer` provides extra plugins to interact with
+        more services from the command line.
+
+        About LuxProvide_
+        =================
+
+        LuxProvide is Luxembourg’s one-stop-shop High Performance Computing
+        Centre, with missions to provide high performance computing
+        capabilities, high-speed connectivity and advanced applications on a
+        national, European and international scale, serving the public and
+        private sectors.
+
+
+        .. _Documentation: https://luxprovide.github.io/melctl-client/
+        .. _Repository: https://github.com/LuxProvide/melctl-client/
+        .. _LuxProvide: https://luxprovide.lu/
+        .. _MelCtl client: https://pypi.org/project/melctl-client/
+    '''),
+    long_description_content_type='text/x-rst',
     packages=find_packages('.') + find_namespace_packages(include=['melctl_client_plugins.*']),
     entry_points={
         'console_scripts': [

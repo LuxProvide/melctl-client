@@ -1,0 +1,42 @@
+# vim: set ft=yaml-ci ts=2
+
+
+name: build
+on:
+  push:
+    branches:
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.10
+
+      - name: Get version
+        id: get_version
+        run: |
+          echo "::set-output name=version::$(python3 setup.py --version)"
+
+      - name: Install Twine
+        run: python3 -m pip install twine
+
+      - name: Build package
+        run: python3 setup.py sdist
+
+      - name: Publish package on PyPi
+        run: >
+          TWINE_PASSWORD=${{ secrets.PYPI_TOKEN }}
+          TWINE_USERNAME=__token__
+          python3 -m twine upload dist/* --skip-existing
+
+      - name: Publish release on GitHub
+        uses: softprops/action-gh-release@v1
+        with:
+          files: "dist/melctl_client-${{ steps.get_version.outputs.version }}.tar.gz"
