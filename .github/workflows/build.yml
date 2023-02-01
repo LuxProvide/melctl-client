@@ -21,8 +21,6 @@ jobs:
 
       - name: Get version
         id: get_version
-        # run: |
-        #   echo "::set-output name=version::$(python3 setup.py --version)"
         run: |
           echo "version=$(python3 setup.py --version)" >> $GITHUB_OUTPUT
 
