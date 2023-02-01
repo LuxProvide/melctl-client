@@ -6,7 +6,7 @@ stages:
   - deploy
 
 
-build_client:
+build:
   stage: build
   image: python:3.10-slim
   only:
