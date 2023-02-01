@@ -9,7 +9,7 @@ on:
 permissions:
   contents: write
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
 
@@ -40,3 +40,4 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: "dist/melctl_client-${{ steps.get_version.outputs.version }}.tar.gz"
+          tag_name: "${{ steps.get_version.outputs.version }}"
