@@ -39,9 +39,14 @@ import os
 import re
 import sys
 
+import time
+import requests
+from pathlib import Path
+from packaging import version
 from argparse import Namespace
 
 from .config import settings
+from . import __version__
 
 
 class Hinter:
@@ -66,7 +71,7 @@ class Hinter:
         """
         if not os.path.isfile(settings.Config.env_file):
             yield (
-                "warning",
+                'warning',
                 f'Configuration file "{settings.Config.env_file}" not found',
             )
 
@@ -77,8 +82,8 @@ class Hinter:
         """
         # URL format
         msg_url = (
-            "warning",
-            """URL (-u, --url or config's "url") should not point to localhost or 127.0.0.1""",
+            'warning',
+            '''URL (-u, --url or config's "url") should not point to localhost or 127.0.0.1''',
         )
         if len(args.url) > 0 and self.localhost_rex.match(args.url):
             yield msg_url
@@ -87,8 +92,51 @@ class Hinter:
         # JWT content
         if len(args.auth) < 1 or len(settings.token) < 1:
             yield (
-                "warning",
-                """Token (-a, --auth or secret "token") does not look like a valid JWT""",
+                'warning',
+                '''Token (-a, --auth or secret "token") does not look like a valid JWT''',
+            )
+
+    def hint_version(self, args: Namespace):
+        """Check MelCtl client version.
+        """
+        current_time = int(time.time())
+        last_check_time = current_time
+        last_check_file = Path(settings.Config.secrets_dir, 'version_check_time')
+        try:
+            # Get and set last version check time
+            if not os.path.isfile(last_check_file):
+                with open(last_check_file, 'w') as fd:
+                    fd.write(str(last_check_time))
+            # Get and check last version
+            else:
+                with open(last_check_file, 'r') as fd:
+                    last_check_time = int(fd.read())
+                # Ignore check if version has been controlled recently
+                if last_check_time + settings.public_releases_freq > current_time:
+                    return
+                # Update last check time
+                with open(last_check_file, 'w') as fd:
+                    fd.write(str(current_time))
+            # Get public version
+            jsdata = requests.get(
+                settings.public_releases_api,
+                timeout=settings.public_releases_timeout).json()
+            public_version = jsdata['tag_name']
+            # Current version should be >= remote version, otherwise yield warning
+            if version.parse(__version__) < version.parse(public_version):
+                yield (
+                    'warning',
+                    f'MelCtl is outdated: current version ({__version__}) < public version ({public_version})'
+                )
+            else:
+                yield (
+                    'info',
+                    f'MelCtl is a bleeding edge release: current version ({__version__}) > public version ({public_version})'
+                )
+        except Exception as error:
+            yield (
+                'warning',
+                f'''Cloud not check latest version at {settings.public_releases_api}: {str(error)}'''
             )
 
     def print_hint(self, args: Namespace, level: str, msg: str):
@@ -102,8 +150,8 @@ class Hinter:
             print(f"{level.upper()}: {msg}", file=sys.stderr)
         else:
             print(
-                f"{self.level_colors[level]}"
-                f"{level.upper()}: {msg}"
+                f'{self.level_colors[level]}'
+                f'{level.upper()}: {msg}'
                 f'{self.level_colors["reset"]}',
                 file=sys.stderr,
             )
@@ -117,6 +165,7 @@ class Hinter:
         for hinter in [
             self.hint_files,
             self.hint_variables,
+            self.hint_version
         ]:
             try:
                 for level, msg in hinter(args):
@@ -126,13 +175,13 @@ class Hinter:
                 _hinted = True
                 self.print_hint(
                     args,
-                    "problem",
-                    f"Failed to run hinter {hinter.__name__}: {str(error)}",
+                    'problem',
+                    f'Failed to run hinter {hinter.__name__}: {str(error)}',
                 )
                 if args.traceback:
                     self.print_hint(
-                        args, "problem", "Dumping exception as -t|--traceback is set"
+                        args, 'problem', 'Dumping exception as -t|--traceback is set'
                     )
                     raise
         if _hinted:
-            print("", file=sys.stderr)
+            print('', file=sys.stderr)

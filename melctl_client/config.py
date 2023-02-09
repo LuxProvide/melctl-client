@@ -53,6 +53,15 @@ class Settings(BaseSettings):
     # MelCtl authentication token
     token: str = ''
 
+    # Public repository release URL
+    public_releases_api: str = 'https://api.github.com/repos/LuxProvide/melctl-client/releases/latest'
+
+    # Public repository access timeout in seconds
+    public_releases_timeout: float = 0.5
+
+    # Public repository check frequency in seconds
+    public_releases_freq: int = 60
+
     class Config:
         """Configuration source.
         """
