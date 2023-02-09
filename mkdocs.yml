@@ -10,12 +10,14 @@ nav:
     - Overview: plugins/index.md
     - Builtins:
         - plugins/builtins/config.md
+        - plugins/builtins/login.md
         - plugins/builtins/ping.md
         - plugins/builtins/version.md
-    - Customer: []
+    - Customer:
+        - plugins/customer/s3.md
     - Admin:
+        - plugins/admin/admin.md
         - plugins/admin/curl.md
-        - plugins/admin/login.md
         - plugins/admin/projects.md
         - plugins/admin/s3ds.md
         - plugins/admin/tasks.md
