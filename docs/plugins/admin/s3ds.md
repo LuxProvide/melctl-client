@@ -5,13 +5,13 @@ Manage S3DS.
 ## Usage
 
 ```shell
-melctl s3ds {list,setup,disable} [common args]
+melctl s3ds {list,setup,disable} [arguments]
 ```
 
-### List access keys
+### `list` - List access keys
 
 ```shell
-melctl s3ds list [common args]
+melctl s3ds list [arguments]
 ```
 
 Example return as table (truncated):
@@ -42,11 +42,11 @@ Example return as YAML (truncated):
   uuid: 1337c6de830200667ef2c5c16c9959c1c03d2405
 ```
 
-### Create an access key
+### `setup` - Create an access key
 
-> **Warning**  
-> One **should really** use the `users` endpoint to create an user access key.  
-> See [the endpoint documentation](./users.md)  
+!!! warning "Low-level command"
+    * You **should really** use the `users s3-setup` command & action to create an user access key
+    * See [the documentation](./users.md)
 
 ```
 melctl s3ds setup <username> --uid <uid> --gid <gid> --paths <path> [path, ...]

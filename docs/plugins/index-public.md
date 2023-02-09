@@ -1,6 +1,6 @@
 # Plugins
 
-MelCtl _plugins_ implements client _commands_ and typically interfaces with one
+MelCtl _plugins_ implement client _commands_ and typically interface with one
 or more API server _endpoints_.
 
 | Plugin     | Description       | Repositories                    |

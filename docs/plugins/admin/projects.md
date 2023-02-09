@@ -5,13 +5,13 @@ Manage MeluXina projects.
 ## Usage
 
 ```shell
-melctl projects {list,get,create,report,add-user,add-coord,del-user,del-coord,add-sharedfs,set-quotas} [common args]
+melctl projects {list,get,create,report,add-user,add-coord,del-user,del-coord,add-sharedfs,set-quotas} [arguments]
 ```
 
 ### `list` - List all projects
 
 ```shell
-melctl projects list [common args]
+melctl projects list [arguments]
 ```
 
 Example return as table (truncated):
@@ -43,7 +43,7 @@ Example return as YAML (truncated):
 ### `get` - Get a project
 
 ```shell
-melctl projects get <name> [common args]
+melctl projects get <name> [arguments]
 ```
 
 * `name` is a project name as returned by `melctl projects list`

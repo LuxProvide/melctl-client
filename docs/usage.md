@@ -10,10 +10,10 @@ melctl <command> [action] [arguments]
 
 Where:
 
-* _command_ refers to the API endpoint your're accessing, e.g, `projects`
-  * Each plugins may implement one or more command
-* _action_ refers to the action to perform (not all _command_ have _actions_)
-* _arguments_ refers to the command's or command's action's argument
+* `command` refers to the API endpoint you're accessing, e.g, `projects`
+    * Each plugin may implement one or more `command`
+* `action` refers to the action to perform (not every `command` has _actions_)
+* `arguments` refers to the command's or command's action's argument
 
 ## Commands syntax
 

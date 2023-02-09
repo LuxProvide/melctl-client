@@ -5,13 +5,13 @@ Manage MeluXina users.
 ## Usage
 
 ```shell
-melctl users {list,get,create,s3-status,s3-setup,s3-disable} [common args]
+melctl users {list,get,create,s3-status,s3-setup,s3-disable} [arguments]
 ```
 
 ### `list` - List all users
 
 ```shell
-melctl users list [common args]
+melctl users list [arguments]
 ```
 
 Example return as table (truncated):
@@ -61,7 +61,7 @@ Example return as YAML (truncated):
 ### `get` - Get a user information
 
 ```shell
-melctl users get <name> [common args]
+melctl users get <name> [arguments]
 ```
 
 * `name` is a user name as appearing in the IDM.
@@ -131,7 +131,7 @@ melctl users create \
 ### `s3-status` - Get an user S3 status
 
 ```shell
-melctl users s3-status <name> [common args]
+melctl users s3-status <name> [arguments]
 ```
 
 * `name` is a user name as appearing in the IDM.
@@ -165,8 +165,9 @@ melctl users s3-setup <name> [--paths <path>, ...]
 * `name` is a user name as appearing in the IDM.
 * `path` are extra path to allow
 
-> **important**  
-> The S3 `secretkey` and `accesskey` are displayed only when the access is configured form the first time or when the access is re-enable.
+!!! warning "Secrets visibility"
+    The S3 `secretkey` and `accesskey` are displayed only when the access is configured for the
+    first time or when the access is re-enabled.
 
 Example return as table:
 

@@ -49,7 +49,7 @@ Install `melctl-client` and the plugins:
 pip3 install ./melctl-client ./melctl-client-plugins-customer
 ```
 
-Update `melctl-client` and the plugins sources:
+Update `melctl-client` and the sources of the plugins:
 
 ```shell
 git pull melctl-client
@@ -102,17 +102,17 @@ Clone the internal repositories:
 
 ```shell
 git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client
-git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins-admin
-git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins-customer
+git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins/admin -o melctl-client-plugins-customer
+git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins/customer -o melctl-client-plugins-customer
 ```
 
 Install `melctl-client` and the plugins:
 
 ```shell
-pip3 install ./melctl-client ./melctl-client-plugins-admin /melctl-client-plugins-customer
+pip3 install ./melctl-client ./melctl-client-plugins-admin ./melctl-client-plugins-customer
 ```
 
-Update `melctl-client` and the plugins sources:
+Update `melctl-client` and the sources of the plugins:
 
 ```shell
 git pull melctl-client
