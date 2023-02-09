@@ -102,8 +102,8 @@ Clone the internal repositories:
 
 ```shell
 git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client
-git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins/admin -o melctl-client-plugins-customer
-git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins/customer -o melctl-client-plugins-customer
+git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins/admin melctl-client-plugins-admin
+git clone ssh://git@gitlab.lxp.lu:8822/lxp-hpc/IaC/meluxina/melctl-client-plugins/customer melctl-client-plugins-customer
 ```
 
 Install `melctl-client` and the plugins:
