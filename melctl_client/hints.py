@@ -122,13 +122,13 @@ class Hinter:
                 settings.public_releases_api,
                 timeout=settings.public_releases_timeout).json()
             public_version = jsdata['tag_name']
-            # Current version should be >= remote version, otherwise yield warning
+            # Yield version messages
             if version.parse(__version__) < version.parse(public_version):
                 yield (
                     'warning',
                     f'MelCtl is outdated: current version ({__version__}) < public version ({public_version})'
                 )
-            else:
+            elif version.parse(__version__) > version.parse(public_version):
                 yield (
                     'info',
                     f'MelCtl is a bleeding edge release: current version ({__version__}) > public version ({public_version})'
