@@ -42,7 +42,7 @@ import sys
 import time
 import requests
 from pathlib import Path
-from packaging import version
+from setuptools.extern.packaging import version
 from argparse import Namespace
 
 from .config import settings
