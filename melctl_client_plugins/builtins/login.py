@@ -35,21 +35,64 @@ __copyright__  = 'Copyright (c) 2023 LuxProvide S.A.'
 __maintainer__ = 'Jean-Philippe Clipffel'
 
 
-from . import ping
-from . import conf
-from . import login
-from . import version
+from datetime import datetime
+import getpass
+from jose import jwt
+from pathlib import Path
+
+from melctl_client.config import settings
+from melctl_client.commands import Command
 
 
-commands = {
-    'ping': ping.Ping,
-    'config': [
-        conf.Init,
-        conf.Show
-    ],
-    'login': [
-        login.User,
-        login.Info
-    ],
-    'version': version.Version
-}
+class User(Command):
+    """Login as user and obtain a token.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'user')
+
+    def target(self, args):
+        # Get user credentials
+        username = input('Username: ')
+        password = getpass.getpass('Password: ')
+        print()
+        # Request token
+        req = self.session.post(
+            f'{args.url}/auth/oauth2/ldap',
+            data={
+                'username': username,
+                'password': password,
+                'grant_type': 'password'
+            },
+            headers={
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        )
+        req.raise_for_status()
+        # Extract token content
+        token_data = req.json().get('access_token')
+        token_path = Path(settings.Config.secrets_dir, 'token')
+        # Create secrets dir and save token
+        Path(settings.Config.secrets_dir).mkdir(parents=True, exist_ok=True)
+        with open(token_path, 'w') as fd:
+            fd.write(token_data)
+        # Done
+        return {
+            'path': token_path,
+            'status': 'Token updated'
+        }
+
+
+class Info(Command):
+    """Get login info.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'info')
+    
+    def target(self, args):
+        claims = jwt.get_unverified_claims(args.auth)
+        claims.update({
+            'valid_until_text': str(datetime.fromtimestamp(claims['valid_until']))
+        })
+        return claims

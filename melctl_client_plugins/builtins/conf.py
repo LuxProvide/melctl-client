@@ -35,21 +35,56 @@ __copyright__  = 'Copyright (c) 2023 LuxProvide S.A.'
 __maintainer__ = 'Jean-Philippe Clipffel'
 
 
-from . import ping
-from . import conf
-from . import login
-from . import version
+import os
+
+from melctl_client.config import settings
+from melctl_client.commands import Command
 
 
-commands = {
-    'ping': ping.Ping,
-    'config': [
-        conf.Init,
-        conf.Show
-    ],
-    'login': [
-        login.User,
-        login.Info
-    ],
-    'version': version.Version
-}
+class Show(Command):
+    """Shows client configuration.
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'show', headers=('url', 'env_file', 'secrets_dir'))
+    
+    def target(self, args):
+        conf = dict([(k, v) for k, v in settings])
+        conf.update({
+            'env_file': settings.Config.env_file,
+            'secrets_dir': settings.Config.secrets_dir
+        })
+        return conf
+
+
+class Init(Command):
+    """Creates a new, default configuration
+    """
+
+    def __init__(self, subparser):
+        super().__init__(subparser, 'init')
+    
+    def target(self, args):
+        results = []
+        # Configuration file
+        results.append({'path': settings.Config.env_file})
+        if not os.path.exists(settings.Config.env_file):
+            with open(settings.Config.env_file, 'w') as fd:
+                for k, v in settings:
+                    if isinstance(v, (int, float)):
+                        fd.write(f'{k}={v}')
+                    elif isinstance(v, str):
+                        fd.write(f'{k}="{v}"')
+                    fd.write(os.linesep)
+            results[-1]['status'] = 'File created'
+        else:
+            results[-1]['status'] = 'File already exists, no change made'
+        # Secrets directory
+        results.append({'path': settings.Config.secrets_dir})
+        if not os.path.isdir(settings.Config.secrets_dir):
+            os.mkdir(settings.Config.secrets_dir)
+            results[-1]['status'] = 'Directory created'
+        else:
+            results[-1]['status'] = 'Directory already exists, not change made'
+        # ---
+        return results
