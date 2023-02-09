@@ -115,9 +115,9 @@ pip3 install ./melctl-client ./melctl-client-plugins-admin ./melctl-client-plugi
 Update `melctl-client` and the sources of the plugins:
 
 ```shell
-git pull melctl-client
-git pull melctl-client-plugins-admin
-git pull melctl-client-plugins-customer
+git -C melctl-client pull
+git -C melctl-client-plugins-admin pull
+git -C melctl-client-plugins-customer pull
 ```
 
 Upgrade `melctl-client` and the plugins:
