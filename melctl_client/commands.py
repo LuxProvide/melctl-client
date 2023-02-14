@@ -120,6 +120,9 @@ class Command:
         # Dump exception
         self.parser.add_argument('-t', '--traceback', dest='traceback',
             action='store_true', default=False, help='Show exceptions traceback')
+        # Dump error
+        self.parser.add_argument('--format-error', dest='format_error',
+            action='store_true', default=False, help='Format and output error')
 
     def format_table(self, args, data):
         """Formats output as a table.
@@ -271,7 +274,8 @@ class Command:
                 self.logger.exception(error)
             else:
                 self.logger.error(str(error))
-            self.format_error(args, error)
+            if args.format_error:
+                self.format_error(args, error)
 
     def target(self, args):
         """Command entry point.
