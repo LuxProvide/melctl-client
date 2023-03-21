@@ -31,9 +31,12 @@ The configuration file is located from:
 
 The following configuration attributes are supported:
 
-| Attribute | Type     | Default                 | Description           |
-| --------- | -------- | ----------------------- | --------------------- |
-| `url`     | `string` | `http://127.0.0.1:8888` | MelCtl API server URL |
+| Attribute                 | Type     | Default                                                                   | Description                   |
+| ------------------------- | -------- | ------------------------------------------------------------------------- | ----------------------------- |
+| `url`                     | `string` | `https://melctl.lxp-prod.cloud.lxp.lu`                                    | MelCtl API server URL         |
+| `public_releases_api`     | `string` | `'https://api.github.com/repos/LuxProvide/melctl-client/releases/latest'` | Public release URL            |
+| `public_releases_timeout` | `int`    | `0.5`                                                                     | Public update check timeout   |
+| `public_releases_freq`    | `int`    | `60`                                                                      | Public update check frequency |
 
 ### Secrets
 

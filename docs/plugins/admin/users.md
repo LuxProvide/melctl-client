@@ -61,10 +61,11 @@ Example return as YAML (truncated):
 ### `get` - Get a user information
 
 ```shell
-melctl users get <name> [arguments]
+melctl users get <name|email> [arguments]
 ```
 
-* `name` is a user name as appearing in the IDM.
+* `name` is a user name (e.g. `u100411`)
+* `email` is a user email (e.g. `foo.bar@lxp.lu`)
 
 Example return as table:
 
@@ -128,6 +129,36 @@ melctl users create \
     --name 'jdoe' --uid 15000 --gid 555
 ```
 
+### `delete` - Delete an user
+
+```shell
+melctl users delete <name> [arguments]
+```
+
+* `name` is a user name (e.g. `u100411`)
+
+Example return as YAML (truncated):
+
+```yaml
+ipa_users_preserve:
+  response:
+    result:
+      summary: Deleted user "u100411"
+      value:
+      - u100411
+    version: 4.9.8
+lustre_homedir_delete:
+  msg:
+  - 'INFO: Home directory removal succeeded'
+  path: /mnt/tier2/users/u100411
+  success: true
+  user: u100411
+s3ds_accesskeys_disable:
+  s3ds_status:
+    code: 200
+    reason: OK
+```
+
 ### `s3-status` - Get an user S3 status
 
 ```shell
@@ -162,8 +193,8 @@ Example return as YAML:
 melctl users s3-setup <name> [--paths <path>, ...]
 ```
 
-* `name` is a user name as appearing in the IDM.
-* `path` are extra path to allow
+* `name` is a user name (e.g. `u100411`)
+* `path` are extra path(s) to allow
 
 !!! warning "Secrets visibility"
     The S3 `secretkey` and `accesskey` are displayed only when the access is configured for the
@@ -190,5 +221,13 @@ Example return as YAML:
   secretkey: null
   accesskey: null
 ```
+
+### `s3-disable` - Disable an user S3 access
+
+```shell
+melctl users s3-disable <name>
+```
+
+* `name` is a user name (e.g. `u100411`)
 
 ---

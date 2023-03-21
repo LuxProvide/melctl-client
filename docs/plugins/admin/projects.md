@@ -113,13 +113,20 @@ melctl projects report [name] \
     [-r,--rangetime lastmonth] \
     [-s,--starttime TIME_START] \
     [-e,--endtime TIME_END] \
-    [--time-unit s,sec,secs,second,seconds,m,min,mins,minute,minutes,h,hrs,hour,hours]
+    [--time-unit s,sec,secs,second,seconds,m,min,mins,minute,minutes,h,hrs,hour,hours] \
+    [--all]
 ```
 
 Example query for previous month usage:
 
 ```shell
 melctl projects report -r lastmonth --time-unit hours
+```
+
+Example query for previous month usage, including unused projects:
+
+```shell
+melctl projects report -r lastmonth --all
 ```
 
 Example query for April 2002:
@@ -136,6 +143,7 @@ name      disk        cpu      gpu    mem    fpga
 lxp               3180816  2696785   6444  173387
 billtest              112        0      0       0
 melsupp              1905        0      0       0
+nocredit                0        0      0       0
 ```
 
 Example return as YAML (truncated):
@@ -156,6 +164,11 @@ Example return as YAML (truncated):
   gpu: 0
   mem: 0
   name: melsupp
+- cpu: 0
+  fpga: 0
+  gpu: 0
+  mem: 0
+  name: nocredit
 ```
 
 ### `add-user` - Add users to a project

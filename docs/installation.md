@@ -49,6 +49,8 @@ Install `melctl-client` and the plugins:
 pip3 install ./melctl-client ./melctl-client-plugins-customer
 ```
 
+### Upgrade from source
+
 Update `melctl-client` and the sources of the plugins:
 
 ```shell
@@ -111,6 +113,8 @@ Install `melctl-client` and the plugins:
 ```shell
 pip3 install ./melctl-client ./melctl-client-plugins-admin ./melctl-client-plugins-customer
 ```
+
+### Upgrade from source
 
 Update `melctl-client` and the sources of the plugins:
 
