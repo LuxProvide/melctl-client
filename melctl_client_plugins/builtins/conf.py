@@ -60,6 +60,8 @@ class Init(Command):
     """Creates a new, default configuration
     """
 
+    noset = ('token',)
+
     def __init__(self, subparser):
         super().__init__(subparser, 'init')
     
@@ -70,11 +72,12 @@ class Init(Command):
         if not os.path.exists(settings.Config.env_file):
             with open(settings.Config.env_file, 'w') as fd:
                 for k, v in settings:
-                    if isinstance(v, (int, float)):
-                        fd.write(f'{k}={v}')
-                    elif isinstance(v, str):
-                        fd.write(f'{k}="{v}"')
-                    fd.write(os.linesep)
+                    if k not in self.noset:
+                        if isinstance(v, (int, float)):
+                            fd.write(f'{k}={v}')
+                        elif isinstance(v, str):
+                            fd.write(f'{k}="{v}"')
+                        fd.write(os.linesep)
             results[-1]['status'] = 'File created'
         else:
             results[-1]['status'] = 'File already exists, no change made'

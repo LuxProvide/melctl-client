@@ -40,10 +40,7 @@ from pydantic import BaseSettings
 
 
 class Settings(BaseSettings):
-    """MelCTL settings.
-
-    :param url: MelCTL URL
-    :param token: MelCTL API token
+    """MelCTL client settings.
     """
 
     # MelCtl server URL
