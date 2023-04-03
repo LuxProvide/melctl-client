@@ -34,5 +34,51 @@ __copyright__  = 'Copyright (c) 2023 LuxProvide S.A.'
 __maintainer__ = 'Jean-Philippe Clipffel'
 
 
-__version__ = '5.5.0'
-__version_name__ = 'Pedantic Santa'
+from textwrap import dedent
+
+from melctl_client.config import settings
+from melctl_client.commands import Command
+
+
+class Bash(Command):
+    """Generates a Bash autocomplete script.
+    """
+    shell = 'bash'
+
+    def __init__(self, subparser):
+        super().__init__(subparser, self.shell)
+
+    def target(self, args):
+        # Main completer
+        completer = f'COMPREPLY=( $(compgen -W "{" ".join(args._completer.keys())}" -- $cur) )'
+        # Commands completer
+        subcompleters = [
+            f'"{command}") COMPREPLY=( $(compgen -W "{" ".join(actions)}" -- $cur ) );;'
+            for command, actions
+            in args._completer.items()
+        ]
+        # Generate and print the completion script
+        print(dedent(f'''\
+            function _melctl_comp()
+            {{
+                local cur command
+                COMPREPLY=()
+                cur=${{COMP_WORDS[COMP_CWORD]}}
+                command=${{COMP_WORDS[COMP_CWORD-1]}}
+                if [ $COMP_CWORD -eq 1 ]; then
+                    {completer}
+                elif [ $COMP_CWORD -eq 2 ]; then
+                    case "$command" in
+                        {"".join(subcompleters)}
+                        *);;
+                    esac
+                fi
+                return 0
+            }} && complete -F _melctl_comp melctl
+        '''))
+
+
+class ZSH(Bash):
+    """Generates a ZSH autocomplete script.
+    """
+    shell = 'zsh'

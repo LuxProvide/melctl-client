@@ -38,13 +38,18 @@ from . import ping
 from . import conf
 from . import login
 from . import version
+from . import complete
 
 
 commands = {
     'ping': ping.Ping,
     'config': [
         conf.Init,
-        conf.Show
+        conf.Show,
+    ],
+    'complete': [
+        complete.Bash,
+        complete.ZSH
     ],
     'login': [
         login.User,

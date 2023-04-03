@@ -57,8 +57,11 @@ def load_commands(commands, subparser):
     commands_parsers = []
     commands_subparsers = []
     commands_instances = []
+    commands_completer = {}
     # Commands parsers, subparsers and instances initialization
     for command_name, commands_actions in commands.items():
+        # Add command to completer
+        commands_completer[command_name] = []
         # For command in form 'melctl <command> <action> ...':
         if isinstance(commands_actions, (list, tuple, set)):
             commands_parsers.append(subparser.add_parser(command_name))
@@ -68,26 +71,39 @@ def load_commands(commands, subparser):
             for command_action in commands_actions:
                 commands_instances.append(command_action(commands_subparsers[-1]))
                 commands_subparsers[-1].required = True
+                # Add command actions to completer
+                commands_completer[command_name].append(
+                    commands_instances[-1].parser.prog.split(' ')[-1]
+                )
         # For command in form 'melctl <command> ...':
         else:
             commands_instances.append(commands_actions(subparser))
     # Done
-    return commands_parsers, commands_subparsers, commands_instances
+    return (
+        commands_parsers,
+        commands_subparsers,
+        commands_instances,
+        commands_completer
+    )
 
 
-def load_plugins(subparser, pkgs: list = [melctl_client_plugins,]):
+def load_plugins(subparser, pkgs: list = [melctl_client_plugins,]) -> dict:
     """Load MelCtl client plugins.
 
     :param subparser: Argparse's subparser
     :param pkgs: Packages to load plugins from
     """
+    completer = {}
     for pkg in pkgs:
         for _, name, _ in pkgutil.iter_modules(pkg.__path__, pkg.__name__ + '.'):
             # Import plugin
             plugin = importlib.import_module(name)
-            # Load plugin commands
+            # Load plugin commands and update completer
             if hasattr(plugin, 'commands'):
-                load_commands(plugin.commands, subparser)
+                completer.update(
+                    load_commands(plugin.commands, subparser)[3]
+                )
+    return completer
 
 
 def main():
@@ -98,9 +114,11 @@ def main():
     subparser = parser.add_subparsers(dest='command')
     subparser.required = True
     # Load and init plugins & commands
-    load_plugins(subparser)
-    # Parse arguments, run hints and invoke command
+    completer = load_plugins(subparser)
+    # Parse arguments and inject plugins parser
     args = parser.parse_args()
+    args._completer = completer
+    # Run hints and invoke command
     Hinter()(args)
     args.func(args)
 
