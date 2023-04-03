@@ -46,7 +46,7 @@ class Show(Command):
 
     def __init__(self, subparser):
         super().__init__(subparser, 'show', headers=('url', 'env_file', 'secrets_dir'))
-    
+
     def target(self, args):
         conf = dict([(k, v) for k, v in settings])
         conf.update({
@@ -64,7 +64,7 @@ class Init(Command):
 
     def __init__(self, subparser):
         super().__init__(subparser, 'init')
-    
+
     def target(self, args):
         results = []
         # Configuration file
