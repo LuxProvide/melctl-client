@@ -208,7 +208,8 @@ class Command:
         :param error: Exception
         """
         data = {
-            'error': str(error)
+            'error': str(error),
+            'response': getattr(error, 'jsdata', None)
         }
         if args.traceback:
             data['traceback'] = traceback.format_exc()
@@ -308,6 +309,21 @@ class Command:
             self.format(args, jsdata)
             raise error
 
+    def raise_for_status(self, req, *args, **kwargs):
+        """Raise an error in case of invalid status with extra information.
+
+        :param req: Current request
+        """
+        try:
+            req.raise_for_status(*args, **kwargs)
+        except Exception as error:
+            try:
+                setattr(error, 'jsdata', req.json())
+            except Exception:
+                pass
+            raise error
+
+
 class SimpleCommand(Command):
     """Generic command, easier to extend.
     """
@@ -326,5 +342,6 @@ class SimpleCommand(Command):
         req = self.session.request(
             self.method,
             f'{self.url}/{self.urn.format_map(args.__dict__)}')
-        req.raise_for_status()
+        # req.raise_for_status()
+        self.raise_for_status(req)
         return req.json()
