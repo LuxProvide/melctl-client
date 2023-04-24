@@ -2,15 +2,17 @@
 
 ## Builtins
 
-<!-- Keep it synced with commands.md -->
-| Command   | Action | Description                            | Documentation                         |
-| --------- | ------ | -------------------------------------- | ------------------------------------- |
-| `ping`    | -      | Ping the MelCtl API server             | [Link](./plugins/builtins/ping.md)    |
-| `login`   | `user` | Login / get an user token              | [Link](./plugins/builtins/login.md)   |
-| `login`   | `info` | Get login / token information          | [Link](./plugins/builtins/login.md)   |
-| `config`  | `show` | Show the client configuration          | [Link](./plugins/builtins/config.md)  |
-| `config`  | `init` | Initialize a new default configuration | [Link](./plugins/builtins/config.md)  |
-| `version` | -      | Print MelCtl client and server version | [Link](./plugins/builtins/version.md) |
+<!-- Keep it synced with commands-public.md -->
+| Command    | Action | Description                             | Documentation                          |
+| ---------- | ------ | --------------------------------------- | -------------------------------------- |
+| `ping`     | -      | Ping the MelCtl API server              | [Link](./plugins/builtins/ping.md)     |
+| `login`    | `user` | Login / get an user token               | [Link](./plugins/builtins/login.md)    |
+| `login`    | `info` | Get login / token information           | [Link](./plugins/builtins/login.md)    |
+| `config`   | `show` | Show the client configuration           | [Link](./plugins/builtins/config.md)   |
+| `config`   | `init` | Initialize a new default configuration  | [Link](./plugins/builtins/config.md)   |
+| `complete` | `bash` | Generate the Bash autocompletion script | [Link](./plugins/builtins/complete.md) |
+| `complete` | `zsh`  | Generate the ZSH autocompletion script  | [Link](./plugins/builtins/complete.md) |
+| `version`  | -      | Print MelCtl client and server version  | [Link](./plugins/builtins/version.md)  |
 
 ## Customer
 

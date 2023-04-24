@@ -3,6 +3,20 @@
 The `melctl` client can be configured via command line arguments and via a
 configuration file.
 
+## Initial configuration
+
+After the first installation, run `melctl config init` to initialize the configuration file:
+
+```shell
+melctl config init
+```
+
+!!! note "Internal users"
+    Internal users should change the MelCTL server URL to point to the internal production instance.
+
+    Edit the environment file `melctl-cli.env` (you may find the full path using `melctl config show`)
+    and change the URL parameter (`url="https://melctl..."`) to the appropriate value.
+
 ## Configurable items
 
 | Argument       | Config key   | Description                     |
