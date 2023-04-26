@@ -15,6 +15,7 @@ nav:
         - plugins/builtins/version.md
     - Customer:
         - plugins/customer/s3.md
+        - plugins/customer/s8s.md
 
 theme:
   name: material
