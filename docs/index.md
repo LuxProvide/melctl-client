@@ -4,8 +4,8 @@ MelCtl client documentation.
 
 ## Quick start
 
-* [Install and upgrade MelCtl](docs/installation.md)
-* [Configure MelCtl](docs/config.md)
+* [Install and upgrade MelCtl](installation.md)
+* [Configure MelCtl](config.md)
 
 ---
 
