@@ -93,7 +93,7 @@ setup(
         'requests >= 1.28',
         'tabulate >= 0.8',
         'pygments >= 2.12',
-        'pydantic[dotenv] >= 1.9',
+        'pydantic[dotenv] < 2',
         'pyyaml >= 6.0',
         'python-jose[cryptography] >= 3.3',
         # Library stubs
