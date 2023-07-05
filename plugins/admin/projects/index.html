@@ -1,0 +1,844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      <link rel="icon" href="../../../assets/melctl-client.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+    
+    
+      
+        <title>Projects - MelCtl - Client</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.26e3688c.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ecc896b0.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#projects" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="MelCtl - Client" class="md-header__button md-logo" aria-label="MelCtl - Client" data-md-component="logo">
+      
+  <img src="../../../assets/melctl-client.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            MelCtl - Client
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Projects
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="blue-grey" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+            
+            
+            
+            <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="blue-grey" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
+          
+        </form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="MelCtl - Client" class="md-nav__button md-logo" aria-label="MelCtl - Client" data-md-component="logo">
+      
+  <img src="../../../assets/melctl-client.png" alt="logo">
+
+    </a>
+    MelCtl - Client
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../installation/" class="md-nav__link">
+        Installation & upgrade
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../config/" class="md-nav__link">
+        Configuration
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Usage
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Usage
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../usage/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../commands-public/" class="md-nav__link">
+        Commands
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          Plugins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          Plugins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index-public/" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+          Builtins
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Builtins
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtins/config/" class="md-nav__link">
+        Config
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtins/login/" class="md-nav__link">
+        Login
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtins/ping/" class="md-nav__link">
+        Ping
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../builtins/version/" class="md-nav__link">
+        Version
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+          Customer
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Customer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer/s3/" class="md-nav__link">
+        S3
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../customer/s8s/" class="md-nav__link">
+        S8S
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-list-all-projects" class="md-nav__link">
+    list - List all projects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-get-a-project" class="md-nav__link">
+    get - Get a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-create-a-project" class="md-nav__link">
+    create - Create a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#report-get-projects-resource-usage" class="md-nav__link">
+    report - Get projects resource usage
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-user-add-users-to-a-project" class="md-nav__link">
+    add-user - Add users to a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-coord-add-coordinators-to-a-project" class="md-nav__link">
+    add-coord - Add coordinators to a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#del-user-remove-users-from-a-project" class="md-nav__link">
+    del-user - Remove users from a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#del-coord-remove-coordinators-from-a-project" class="md-nav__link">
+    del-coord - Remove coordinators from a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-sharedfs-add-shared-file-system-tier-to-a-project" class="md-nav__link">
+    add-sharedfs - Add shared file system tier to a project
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-quotas-set-a-project-quotas" class="md-nav__link">
+    set-quotas - Set a project quotas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="projects">Projects</h1>
+<p>Manage MeluXina projects.</p>
+<h2 id="usage">Usage</h2>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span><span class="o">{</span>list,get,create,report,add-user,add-coord,del-user,del-coord,add-sharedfs,set-quotas<span class="o">}</span><span class="w"> </span><span class="o">[</span>arguments<span class="o">]</span>
+</code></pre></div>
+<h3 id="list-list-all-projects"><code>list</code> - List all projects</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>list<span class="w"> </span><span class="o">[</span>arguments<span class="o">]</span>
+</code></pre></div>
+<p>Example return as table (truncated):</p>
+<div class="highlight"><pre><span></span><code>name       path
+---------  -----------------------------
+billtest   root.luxembourg.lxp.billtest
+billtest2  root.luxembourg.lxp.billtest2
+melsupp    root.luxembourg.melsupp
+</code></pre></div>
+<p>Example return as YAML (truncated):</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">children</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">coordinators</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-melctl</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jpclipffel</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">omula</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">melsupp</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root.luxembourg.melsupp</span>
+<span class="w">  </span><span class="nt">users</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cthomaz</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<h3 id="get-get-a-project"><code>get</code> - Get a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>get<span class="w"> </span>&lt;name&gt;<span class="w"> </span><span class="o">[</span>arguments<span class="o">]</span>
+</code></pre></div>
+<ul>
+<li><code>name</code> is a project name as returned by <code>melctl projects list</code></li>
+</ul>
+<p>Example return as table (truncated):</p>
+<div class="highlight"><pre><span></span><code>name       users                 coordinators         children    path
+---------  --------------------  -------------------  ----------  -----------------------------
+billtest   [&#39;wmainassara&#39;, ...]  [&#39;app-melctl&#39;, ...]  {}          root.luxembourg.lxp.billtest
+billtest2  [&#39;mdenou&#39;, ...]       [&#39;app-melctl&#39;, ...]  {}          root.luxembourg.lxp.billtest2
+</code></pre></div>
+<p>Example return as YAML (truncated):</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">children</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">coordinators</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-melctl</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">billtest</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root.luxembourg.lxp.billtest</span>
+<span class="w">  </span><span class="nt">users</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">wmainassara</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">vplugaru</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">children</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">{}</span>
+<span class="w">  </span><span class="nt">coordinators</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">app-melctl</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jpclipffel</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">billtest2</span>
+<span class="w">  </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">root.luxembourg.lxp.billtest2</span>
+<span class="w">  </span><span class="nt">users</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mdenou</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</code></pre></div>
+<h3 id="create-create-a-project"><code>create</code> - Create a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>create<span class="w"> </span>-p,--parent<span class="w"> </span>PARENT<span class="w"> </span><span class="o">[[</span>--name<span class="w"> </span>NAME<span class="o">]</span><span class="w"> </span><span class="o">[</span>--uid<span class="w"> </span>UID<span class="o">]]</span>
+</code></pre></div>
+<p>Example to create a new EuroHPC project (name and UID are automatically generated):</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>create<span class="w"> </span>-p<span class="w"> </span>eurohpc
+</code></pre></div>
+<p>Example to create a new Luxembourg project (name and UID are automatically generated):</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>create<span class="w"> </span>-p<span class="w"> </span>luxembourg
+</code></pre></div>
+<p>Example to create a custom project with UID/GID <code>200999</code> named <code>lxp200999</code>:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>create<span class="w"> </span>-p<span class="w"> </span>lxp<span class="w"> </span>--uid<span class="w"> </span><span class="m">200999</span><span class="w"> </span>--name<span class="w"> </span>lxp200999
+</code></pre></div>
+<h3 id="report-get-projects-resource-usage"><code>report</code> - Get projects resource usage</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>report<span class="w"> </span><span class="o">[</span>name<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>-r,--rangetime<span class="w"> </span>lastmonth<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>-s,--starttime<span class="w"> </span>TIME_START<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>-e,--endtime<span class="w"> </span>TIME_END<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--time-unit<span class="w"> </span>s,sec,secs,second,seconds,m,min,mins,minute,minutes,h,hrs,hour,hours<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--all<span class="o">]</span>
+</code></pre></div>
+<p>Example query for previous month usage:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>report<span class="w"> </span>-r<span class="w"> </span>lastmonth<span class="w"> </span>--time-unit<span class="w"> </span>hours
+</code></pre></div>
+<p>Example query for previous month usage, including unused projects:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>report<span class="w"> </span>-r<span class="w"> </span>lastmonth<span class="w"> </span>--all
+</code></pre></div>
+<p>Example query for April 2002:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>report<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;2022-04-01&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;2022-05-01&quot;</span><span class="w"> </span>--time-unit<span class="w"> </span>hours
+</code></pre></div>
+<p>Example return as table (truncated):</p>
+<div class="highlight"><pre><span></span><code>name      disk        cpu      gpu    mem    fpga
+--------  ------  -------  -------  -----  ------
+lxp               3180816  2696785   6444  173387
+billtest              112        0      0       0
+melsupp              1905        0      0       0
+nocredit                0        0      0       0
+</code></pre></div>
+<p>Example return as YAML (truncated):</p>
+<div class="highlight"><pre><span></span><code><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3180930</span>
+<span class="w">  </span><span class="nt">fpga</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">173387</span>
+<span class="w">  </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2696975</span>
+<span class="w">  </span><span class="nt">mem</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">6444</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">lxp</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">112</span>
+<span class="w">  </span><span class="nt">fpga</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">mem</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">billtest</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1905</span>
+<span class="w">  </span><span class="nt">fpga</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">mem</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">melsupp</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">cpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">fpga</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">gpu</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">mem</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nocredit</span>
+</code></pre></div>
+<h3 id="add-user-add-users-to-a-project"><code>add-user</code> - Add users to a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>add-user<span class="w"> </span>PROJECT<span class="w"> </span>-m<span class="w"> </span>USER<span class="w"> </span><span class="o">[</span>USER<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
+<p>Example to add users <code>u100001</code> and <code>u100002</code> to project <code>p200001</code>:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>add-user<span class="w"> </span>p200001<span class="w"> </span>-m<span class="w"> </span>u100001<span class="w"> </span>u100002
+</code></pre></div>
+<h3 id="add-coord-add-coordinators-to-a-project"><code>add-coord</code> - Add coordinators to a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>add-coord<span class="w"> </span>PROJECT<span class="w"> </span>-m<span class="w"> </span>USER<span class="w"> </span><span class="o">[</span>USER<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
+<p>Example to add coordinators <code>u100001</code> and <code>u100002</code> to project <code>p200001</code>:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>add-coord<span class="w"> </span>p200001<span class="w"> </span>-m<span class="w"> </span>u100001<span class="w"> </span>u100002
+</code></pre></div>
+<h3 id="del-user-remove-users-from-a-project"><code>del-user</code> - Remove users from a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>del-user<span class="w"> </span>PROJECT<span class="w"> </span>-m<span class="w"> </span>USER<span class="w"> </span><span class="o">[</span>USER<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
+<p>Example to remove users <code>u100001</code> and <code>u100002</code> from project <code>p200001</code>:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>del-user<span class="w"> </span>p200001<span class="w"> </span>-m<span class="w"> </span>u100001<span class="w"> </span>u100002
+</code></pre></div>
+<h3 id="del-coord-remove-coordinators-from-a-project"><code>del-coord</code> - Remove coordinators from a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>del-coord<span class="w"> </span>PROJECT<span class="w"> </span>-m<span class="w"> </span>USER<span class="w"> </span><span class="o">[</span>USER<span class="w"> </span>...<span class="o">]</span>
+</code></pre></div>
+<p>Example to remove coordinators <code>u100001</code> and <code>u100002</code> from project <code>p200001</code>:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>del-coord<span class="w"> </span>p200001<span class="w"> </span>-m<span class="w"> </span>u100001<span class="w"> </span>u100002
+</code></pre></div>
+<h3 id="add-sharedfs-add-shared-file-system-tier-to-a-project"><code>add-sharedfs</code> - Add shared file system tier to a project</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>add-sharedfs<span class="w"> </span>PROJECT<span class="w"> </span>--tier<span class="w"> </span>TIER<span class="w"> </span>--owner<span class="w"> </span>USER
+</code></pre></div>
+<p>Example to add a tier 2 shared filesystem directory owned by user <code>u100001</code>
+to project <code>p200001</code>:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>add-sharedfs<span class="w"> </span>p200001<span class="w"> </span>--tier<span class="w"> </span><span class="m">2</span><span class="w"> </span>--owner<span class="w"> </span>u100001
+</code></pre></div>
+<h3 id="set-quotas-set-a-project-quotas"><code>set-quotas</code> - Set a project quotas</h3>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>set-quotas<span class="w"> </span>PROJECT<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--tier<span class="w"> </span>TIER<span class="w"> </span>--kbytes<span class="w"> </span>KBYTES<span class="w"> </span>--inodes<span class="w"> </span>INODES<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--cpu<span class="w"> </span>MINUTES<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--gpu<span class="w"> </span>MINUTES<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--mem<span class="w"> </span>MINUTES<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="o">[</span>--fpga<span class="w"> </span>MINUTES<span class="o">]</span><span class="w"> </span><span class="se">\</span>
+</code></pre></div>
+<p>Example to set both tier 2 and GPU quotas:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>set-quotas<span class="w"> </span>p200001<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tier<span class="w"> </span><span class="m">2</span><span class="w"> </span>--kbytes<span class="w"> </span><span class="m">1048576000</span><span class="w"> </span>--inodes<span class="w"> </span><span class="m">1000000</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--gpu<span class="w"> </span><span class="k">$((</span><span class="m">3000</span><span class="o">*</span><span class="m">60</span><span class="k">))</span>
+</code></pre></div>
+<p>Example to set tier 2 quotas:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>set-quotas<span class="w"> </span>p200001<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--tier<span class="w"> </span><span class="m">2</span><span class="w"> </span>--kbytes<span class="w"> </span><span class="m">1048576000</span><span class="w"> </span>--inodes<span class="w"> </span><span class="m">1000000</span>
+</code></pre></div>
+<p>Example to set CPU and FPGA quotas:</p>
+<div class="highlight"><pre><span></span><code>melctl<span class="w"> </span>projects<span class="w"> </span>set-quotas<span class="w"> </span>p200001<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cpu<span class="w"> </span><span class="k">$((</span><span class="m">1000</span><span class="o">*</span><span class="m">60</span><span class="k">))</span>
+<span class="w">    </span>--fpga<span class="w"> </span><span class="k">$((</span><span class="m">3000</span><span class="o">*</span><span class="m">60</span><span class="k">))</span>
+</code></pre></div>
+<hr />
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "search": "../../../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.220ee61c.min.js"></script>
+      
+    
+  </body>
+</html>
